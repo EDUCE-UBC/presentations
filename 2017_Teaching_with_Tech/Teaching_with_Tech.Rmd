@@ -1,0 +1,115 @@
+---
+title: "Teaching with Tech 2017"
+author: "Dr. Kim Dill-McFarland"
+date: "December 6, 2017"
+output:
+  html_document: 
+    toc: yes
+    toc_float: 
+      collapsed: false
+  pdf_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+# Introduction
+
+Goal: Build an interactive 3D nMDS plot of animal microbiome data for use at Teaching with Technology showcase, UBC 2017
+
+Throughout this tutorial, look for the ![](thunderbird.png) to denote lines of code or other steps that you should run on your computer if you are following along.
+
+This module and all materials herein were developed as part of the 
+Experiential Data science for Undergraduate Cross-Disciplinary Education (EDUCE) initiative at the U. of British Columbia
+
+# Before beginning module
+
+Prior to starting this module, you will need to download the following software. You must have administrator privileges on your machine to complete these installs.
+
+![](thunderbird.png) Download and install
+
+* [R](http://cran.stat.sfu.ca/)
+* [RStudio](https://www.rstudio.com/products/rstudio/download/) FREE version
+
+You will also need to download the data files from GitHub. You can download them by going to https://github.com/EDUCE-UBC/module_development/Teaching_with_Tech_2017. Click **Clone or download** -->  "Download as zip" to get all of the files as one zipped item.
+
+# Packages and files
+
+For this module, we will be utilizing a number of packages. Please load them into RStudio. If you have not previously downloaded a package used here, use the 'Packages' tab to the right to install prior to loading.
+
+![](thunderbird.png) Load packages
+```{r Packages}
+#For microbial ecology including calculating beta-diversity and nMDS
+library(phyloseq)
+library(vegan)
+#3D and interactive plot creation
+library(plotly)
+#Dataframe manipulation
+library(tidyr)
+```
+
+Once you've unzipped the GitHub data folder, load each data type into R. Remember to specify row names and column names (*i.e.* header) where necessary.
+
+![](thunderbird.png) Load data
+```{r Load data}
+#OTU table with samples as rows and OTU (i.e. microbial species) as columns
+OTU = read.table("Module1_OTU.txt", row.names=1, header=TRUE)
+#Taxonomy of each OTU from Domain to species
+tax = read.table("Module1_taxonomy.txt", row.names=1, header=TRUE)
+#Metadata associated with each sample including animal type
+meta = read.table("Module1_metadata.txt", row.names=1, header=TRUE)
+#Neighbor-joining tree of all OTUs to infer taxonomy
+load("~/Module1_mothur/NJ.tree.Rdata")
+```
+
+Merge all of these data into one object using `phyloseq`.
+
+![](thunderbird.png) Merge data
+```{r Physeq object}
+#Define data as phyloseq specific data types
+OTU.UF = otu_table(as.matrix(OTU), taxa_are_rows=FALSE)
+tax.UF = tax_table(as.matrix(tax))
+meta.UF = sample_data(meta)
+
+#Merge into a physeq object
+physeq = phyloseq(OTU.UF, tax.UF, meta.UF, NJ.tree)
+```
+
+# Beta-diversity
+
+Beta-diversity is one metric for comparing microbial communities. This is *between sample* diversity means you calculate a value for every pairwise comparison between samples. High beta-diversity means the communities are very different from one another while low beta-diversity means they are very similar. We can take into account both which microorganisms (OTUs in this case) are present as well as how abundant these microorganisms are when calculating beta-diversity.
+
+Here, we will use a the **unweighted UniFrac** beta-diversity metric. This metric uses our neighbor-joining tree to infer taxonomic relatedness of OTUs but only takes into account presence/absence (not abundance) of these microorganisms.
+
+![](thunderbird.png) Calculate UniFrac
+```{r UniFrac}
+uwUF.dist = UniFrac(physeq, weighted=TRUE, normalized=TRUE)
+```
+
+This creates a large matrix of n x n size where n is our number of microbial communities being compared. It is very difficult to glean information from this large table so we can collapse it into 2- or 3-dimensional space using non-metric multidimensional scaling (nMDS). Let's do 3 dimensions to start.
+
+![](thunderbird.png) Calculate nMDS
+```{r nMDS}
+#Calculate nMDS
+uwUF.nmds.3D = metaMDS(uwUF.dist, method="NMDS", k=3)
+#Pull out xyz values into a table
+uwUFxyz = scores(uwUF.nmds.3D, display="sites")
+```
+
+We can then plot these 3 dimensions using `plotly`.
+
+![](thunderbird.png) Plot nMDS
+```{r}
+#Colors
+gg_color_hue <- function(n) {
+  hues = seq(15, 375, length = n + 1)
+  hcl(h = hues, l = 65, c = 100)[1:n]
+}
+
+cols = gg_color_hue(8)
+
+plot_ly(x=uwUFxyz[,1], y=uwUFxyz[,2], z=uwUFxyz[,3], type="scatter3d", mode="markers", color=meta$Animal, colors=cols,  text=~paste('Animal: ', meta$Animal, '</br> Individual: ', meta$Individual)) %>% layout(showlegend = FALSE)
+```
+
+Here, we see each dot represents an entire microbial community for one sample. The closer two dots are, the more similar the overall microbial communities of those two samples are. Hover over the dots to see what types of animals we are comparing here.
+
+**Do you see any patterns in which animal tend to have more similar microbial communities? What biological reasoning can explain these patterns?**
