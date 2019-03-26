@@ -1,0 +1,671 @@
+---
+title: "Incorporating <br> data science into undergraduate microbiology"
+author: "Kim Dill-McFarland"
+date: 'April 2, 2019'
+output: 
+  ioslides_presentation:
+    css: default.css
+urlcolor: blue
+editor_options: 
+  chunk_output_type: console
+---
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+    $('slide:not(.title-slide, .backdrop, .segue)').append('<footer></footer>');    
+    $('footer').attr('label', 'Slides at bit.ly/M&I_EDUCE');
+
+  })
+</script>
+
+<style>
+  footer:after {
+    font-size: 16pt;
+    content: attr(label);
+    position: absolute;
+    bottom: 20px;
+    left: 500px;
+    line-height: 1.9;
+    display: block;
+  }
+</style>
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ggthemes)
+library(scales)
+library(DiagrammeR)
+```
+
+## Data science
+
+* extracting knowledge and meaning from (big) data
+
+>* statistics, mathematics, computer science
+
+<br>
+
+>* Where do the data come from?
+
+##
+
+```{r echo=FALSE, fig.align="center"}
+knitr::include_graphics("images/Uncle_Sam.png")
+```
+
+<center><font size="4">(James Montgomery Flagg)</font></center>
+
+## {.flexbox .vcenter}
+
+<center><font size="6">$>$ 90% of researchers in the biological sciences work with or plan to work with big data</font>
+
+<font size="4">(Williams & Teal 2017)</font></center>
+
+## Next-generation sequencing
+
+```{r echo=FALSE, message=FALSE, fig.height=4}
+# Plot cost Mb DNA by year
+p1 <- read_tsv("data/sequencing_costs_table_july_2017.txt") %>% 
+  ggplot(aes(x=Date, y=CostperMb)) +
+  geom_line(size=2) +
+  # Force y axis limit up to 10,000. ylim and limits did not work
+  geom_point(aes(x=as.Date("2001-09-01"), y=10000), color="white") +
+  # Label by year
+  scale_x_date(date_labels="%Y", date_breaks="1 year") +
+  # Log scale cost
+  scale_y_continuous(trans="log",
+                     labels=comma_format(accuracy=0.1),
+                     breaks = c(0.1,1,10,100,1000,10000)) +
+  # Beautify
+  labs(x="", y="Cost per\n Megabase (USD)") +
+  theme_classic() +
+  theme(text = element_text(size=20),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+p1
+```
+
+<center><font size="4">(NIH National Human Genome Research Institute)</font></center>
+
+## Next-generation sequencing
+
+```{r echo=FALSE, message=FALSE, fig.height=4}
+# Add breaks
+p1 +
+  geom_vline(xintercept=as.Date("2002-01-01"), size=1, color="steelblue") +
+  geom_vline(xintercept=as.Date("2008-01-01"), size=1, color="steelblue") +
+  geom_vline(xintercept=as.Date("2014-01-01"), size=1, color="steelblue")
+```
+
+<center><font size="4">(NIH National Human Genome Research Institute)</font></center>
+
+## Next-generation sequencing
+
+```{r echo=FALSE, message=FALSE, fig.height=4}
+# Add PhD timeline
+p1 +
+  geom_vline(xintercept=as.Date("2002-01-01"), size=1, color="steelblue") +
+  geom_vline(xintercept=as.Date("2008-01-01"), size=1, color="steelblue") +
+  geom_vline(xintercept=as.Date("2014-01-01"), size=1, color="steelblue") +
+  annotate("text", label="1 PhD unit", x=as.Date("2011-01-01"), y=10000, size=8)
+```
+
+<center><font size="4">(NIH National Human Genome Research Institute)</font></center>
+
+## {.flexbox .vcenter}
+
+<center><font size="6">$>$ 60% of researchers in the biological sciences report a need for more training in data science</font>
+
+<font size="4">Meta-analysis 2013 - 2016  
+(Attwood _et al_ 2017)</font></center>
+
+## Not just academia
+
+```{r echo=FALSE, fig.align="center"}
+knitr::include_graphics("images/news_clippings.png")
+```
+
+# We need to teach<br>data science in undergraduate life<br>science curriculum.
+
+## Barriers to data science integration
+  
+>1. Faculty training
+2. Student interest 
+3. Student preparation in mathematics, statistics, and computer science
+4. Already overly full curricula
+5. Limited access to resources (hardware, software)
+
+<font size="4">(Williams _et al_ 2017)</font>
+
+## 
+<div style="float: left; width: 40%;">
+
+<br>
+
+<br>
+
+![](images/EDUCE_Globe.png)
+
+</div>
+
+<div style="float: left; width: 60%;">
+
+<br>
+
+<br>
+
+<font size="7"><span style="color:teal">**E**</span>xperiential  
+<span style="color:teal">**D**</span>ata science for  
+<span style="color:teal">**U**</span>ndergraduate  
+<span style="color:teal">**C**</span>ross-disciplinary  
+<span style="color:teal">**E**</span>ducation</font>
+
+<br>
+<br>
+<br>
+
+</div>
+
+## Our goal {.flexbox .vcenter}
+
+<center><font size="6">Modular integration of  
+data science curriculum into  
+existing courses</font></center>
+
+## Content overview
+```{r echo=FALSE, message=FALSE, fig.align="center"}
+grViz("
+      digraph {
+      # Base statements
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color=grey]
+      A
+      
+      # Cmd line statements
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color=lightblue]
+      B;D;E
+      
+      # R statements
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color=steelblue]
+      F;H;I
+      
+      # Stat statements
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color=darkgoldenrod1]
+      J;L;M
+      
+      # edges
+      edge [color = black, arrowhead = vee, arrowtail = vee, penwidth=3]
+      
+      # edgestatements
+      A->{B F J}
+      B->D D->E
+      F->H H->I
+      J->L L->M
+      J->F F->J
+      
+      # define ranks
+      subgraph {rank = same; B;F;J}
+      
+      # define labels
+      A[label='Introduction \nto data science']
+      
+      B[label='Command line \nintroduction']
+      D[label='Applications']
+      E[label='Advanced \napplications']
+      
+      F[label='R/RStudio \nintroduction']
+      H[label='Applications']
+      I[label='Advanced \napplications']
+      
+      J[label='Statistics \nintroduction']
+      L[label='t-test']
+      M[label='ANOVA and \nlinear regression']
+      }
+      ")
+```
+
+## Course overview
+```{r echo=FALSE, message=FALSE, fig.align="center", fig.width=8}
+grViz("
+      digraph {
+      
+      graph [layout=dot,
+            rankdir = LR]
+
+      # 3rd year statements
+      node[shape=box, fontname=Helvetica,
+      width=2, height=1.3, penwidth=3, fontsize=16, color=lightblue]
+      A;B;C
+
+      # 4th year statements
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color=darkgoldenrod1]
+      D;E;F;G 
+
+      # BCIT statement
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color=lightblue]
+      H
+
+      # edges
+      edge [color = black, arrowhead = vee, arrowtail = vee, penwidth=3]
+      
+      # edgestatements
+      A->B B->A
+      A->{D G}
+      B->C
+      C->{E F D G}
+      {D E F G}->H[dir=back]
+      B->{D G}
+
+      # define ranks
+      subgraph {rank = same; A}
+      subgraph {rank = same; D;E}
+      subgraph {rank = same; F;G}
+
+      # define labels
+      A[label='Microbial \nEcophysiology \nMICB 301']
+      B[label='Molecular Microbiology \nLaboratory \nMICB 322']
+      C[label='Molecular Immunology \nand Virology Laboratory \nMICB 323']
+      D[label='Bioinformatics \nMICB 405']
+      E[label='Experimental \nMolecular Biology \nMICB 447']
+      F[label='Experimental \nMicrobiology \nMICB 421']
+      G[label='Microbial Ecological \nGenomics \nMICB 425']
+      H[label='UBC/BCIT \nBiotechnology \nprogram']
+    }
+")
+```
+
+## Example student
+
+## MICB 301
+```{r echo=FALSE, message=FALSE, fig.align="center"}
+M301 <- grViz("
+      digraph {
+      # Cmd line statements
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color=lightblue]
+      B;D;E
+      
+      # R statements
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color=steelblue]
+      H;I
+      
+      # Stat statements
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color=darkgoldenrod1]
+      M
+      
+      # Student example
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color='#fc9272', style=filled]
+      A;F;J;L
+
+      # edges
+      edge [color = black, arrowhead = vee, arrowtail = vee, penwidth=3]
+      
+      # edgestatements
+      A->{B F J}
+      B->D D->E
+      F->H H->I
+      J->L L->M
+      J->F F->J
+      
+      # define ranks
+      subgraph {rank = same; B;F;J}
+      
+      # define labels
+      A[label='Introduction \nto data science']
+      
+      B[label='Command line \nintroduction']
+      D[label='Applications']
+      E[label='Advanced \napplications']
+      
+      F[label='R/RStudio \nintroduction']
+      H[label='Applications']
+      I[label='Advanced \napplications']
+      
+      J[label='Statistics \nintroduction']
+      L[label='t-test']
+      M[label='ANOVA and \nlinear regression']
+      }
+      ")
+M301
+```
+
+## MICB 301 - MICB 322
+```{r echo=FALSE, message=FALSE, fig.align="center"}
+M322 <- grViz("
+      digraph {
+      # Cmd line statements
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color=lightblue]
+      B;D;E
+      
+      # R statements
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color=steelblue]
+      I
+      
+      # Stat statements
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color=darkgoldenrod1]
+      M
+      
+      # Student example
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color='#fc9272', style=filled]
+      F;H
+
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color='#fee0d2', style=filled]
+      A;J;L
+
+      # edges
+      edge [color = black, arrowhead = vee, arrowtail = vee, penwidth=3]
+      
+      # edgestatements
+      A->{B F J}
+      B->D D->E
+      F->H H->I
+      J->L L->M
+      J->F F->J
+      
+      # define ranks
+      subgraph {rank = same; B;F;J}
+      
+      # define labels
+      A[label='Introduction \nto data science']
+      
+      B[label='Command line \nintroduction']
+      D[label='Applications']
+      E[label='Advanced \napplications']
+      
+      F[label='R/RStudio \nintroduction']
+      H[label='Applications']
+      I[label='Advanced \napplications']
+      
+      J[label='Statistics \nintroduction']
+      L[label='t-test']
+      M[label='ANOVA and \nlinear regression']
+      }
+      ")
+M322
+```
+
+## MICB 301 - 322 - 405
+```{r echo=FALSE, message=FALSE, fig.align="center"}
+M405 <- grViz("
+      digraph {
+      # R statements
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color=steelblue]
+      I
+      
+      # Student example
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color='#fc9272', style=filled]
+      B;D;L;M;E;H
+
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color='#fee0d2', style=filled]
+      A;F;J
+
+      # edges
+      edge [color = black, arrowhead = vee, arrowtail = vee, penwidth=3]
+      
+      # edgestatements
+      A->{B F J}
+      B->D D->E
+      F->H H->I
+      J->L L->M
+      J->F F->J
+      
+      # define ranks
+      subgraph {rank = same; B;F;J}
+      
+      # define labels
+      A[label='Introduction \nto data science']
+      
+      B[label='Command line \nintroduction']
+      D[label='Applications']
+      E[label='Advanced \napplications']
+      
+      F[label='R/RStudio \nintroduction']
+      H[label='Applications']
+      I[label='Advanced \napplications']
+      
+      J[label='Statistics \nintroduction']
+      L[label='t-test']
+      M[label='ANOVA and \nlinear regression']
+      }
+      ")
+M405
+```
+
+## MICB 301 - 322 - 405 - 425
+```{r echo=FALSE, message=FALSE, fig.align="center"}
+M425 <- grViz("
+      digraph {
+      # Student example
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color='#fc9272', style=filled]
+      H;I;D
+
+      node[shape=box, fontname=Helvetica,
+      width=2, penwidth=3, fontsize=16, color='#fee0d2', style=filled]
+      A;B;E;F;J;L;M
+
+      # edges
+      edge [color = black, arrowhead = vee, arrowtail = vee, penwidth=3]
+      
+      # edgestatements
+      A->{B F J}
+      B->D D->E
+      F->H H->I
+      J->L L->M
+      J->F F->J
+      
+      # define ranks
+      subgraph {rank = same; B;F;J}
+      
+      # define labels
+      A[label='Introduction \nto data science']
+      
+      B[label='Command line \nintroduction']
+      D[label='Applications']
+      E[label='Advanced \napplications']
+      
+      F[label='R/RStudio \nintroduction']
+      H[label='Applications']
+      I[label='Advanced \napplications']
+      
+      J[label='Statistics \nintroduction']
+      L[label='t-test']
+      M[label='ANOVA and \nlinear regression']
+      }
+      ")
+M425
+```
+
+## Example student
+
+<div style="float: left; width: 50%;">
+```{r echo=FALSE, fig.align="center", fig.cap="MICB 301"}
+knitr::include_graphics("images/M301.png")
+```
+```{r echo=FALSE, fig.align="center", fig.cap="MICB 405"}
+knitr::include_graphics("images/M405.png")
+```
+</div>
+
+<div style="float: right; width: 50%;">
+```{r echo=FALSE, fig.align="center", fig.cap="MICB 322"}
+knitr::include_graphics("images/M322.png")
+```
+```{r echo=FALSE, fig.align="center", fig.cap="MICB 425"}
+knitr::include_graphics("images/M425.png")
+```
+</div>
+
+## Solutions to integration
+  
+1. Faculty training
+
+>* _Dedicated Postdoctoral Teaching and Learning Fellow_
+
+<br>
+
+2.[] Student interest 
+
+>* _Direct connections to other course curricula_
+>* _Hands-on, experiential learning_
+
+## Solutions to integration
+
+3.[] Student preparation
+
+>* _No prior knowledge assumed_
+
+<br>
+
+4.[] Already overly full curricula
+
+>* _No new courses required_
+
+<br>
+
+5.[] Limited access to resources
+
+>* _Stripped down datasets and use of cloud resources_
+>* _Open-source tools and curricula_
+
+## Students impacted per year
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.height=5, fig.width=8.5}
+read_tsv("data/2018_course_makeup.txt") %>% 
+  # Add total summed variable
+  mutate(Total = rowSums(.[2:8], na.rm=TRUE)) %>% 
+  # Reoder majors factor
+  mutate(major_ord = factor(Major, levels=c("MS/PhD","Other Faculties","Other Science","BIOT","CPSC","MICB/MBIM"))) %>% 
+
+  # Gather
+  gather(key=course, value=count, "301":"447", Total) %>% 
+  na.omit() %>% 
+  
+  ggplot() + 
+  geom_point(aes(x=as.factor(course), y=major_ord, 
+                 size=as.numeric(count), color=as.factor(course))) +
+  # Size parameters, modify legend
+  scale_size_continuous(name="Number \nof students", range = c(0,20),
+                        limits=c(0,356), breaks=c(5,10,20,40,80,160,320)) +
+  # Remove color legend
+  scale_color_discrete(guide=FALSE) +
+  # Add vertical dividers
+  geom_vline(xintercept=7.4, size=1) +
+  #Beautify
+  labs(x="MICB course", y="Undergraduate major") +
+  theme_classic(base_size = 16) +
+  theme(text = element_text(size=20)) +
+  scale_y_discrete(labels=c("MS / PhD", "Other\nFaculties", "Other\nScience", "Biotech", "Computer\nScience", "M&I"))
+```
+
+
+## 
+
+## Acknowledgements
+
+## References
+Attwood _et al_ 10.1093/bib/bbx100
+Williams _et al_ 10.1101/204420
+
+(Williams & Teal 10.1111/nyas.13207)
+
+## Opportunities at UBC
+
+* EDUCE - Postdoctoral Teaching and Learning Fellow (<http://ecoscope.ubc.ca/program-structure/educe/educe-postdoctoral-application>)
+
+<br>
+
+* Master of Data Science - Postdoctoral Teaching and Learning Fellow (https://www.stat.ubc.ca/postdoctoral-teaching-and-learning-fellow-ubc-master-data-science-program-0)
+
+
+## GenBank sequences
+```{r echo=FALSE, message=FALSE, fig.height=3}
+read_tsv("data/GanBank_seqs.txt") %>% 
+  filter(Date <= as.Date("2018-12-31")) %>% 
+  
+  ggplot(aes(x=Date, y=Bases)) +
+  geom_point() +
+  geom_line() +
+  # Force y axis limit up to 10,000. ylim and limits did not work
+  geom_point(aes(x=as.Date("1982-12-01"), y=1000000000000), color="white") +
+  # Label by year
+  scale_x_date(date_labels="%Y", date_breaks="2 year") +
+  # Log scale cost
+  scale_y_continuous(trans="log",
+                     labels=scientific,
+                     breaks=c(1E6,1E8,1E10,1E12)) +
+  # Beautify
+  labs(x="", y="Total basepairs\nin GenBank") +
+  theme_classic() +
+  theme(text = element_text(size=20),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Undergraduate programs
+<div style="float: left; width: 50%;">
+### BSc in Bioinformatics
+
+* U. of Montreal
+* U. Saskatchewan
+* U. Calgary
+* Carleton U.
+
+### Joint BSc degrees
+
+* Simon Fraser U.
+* U. of British Columbia
+
+</div>
+
+<div style="float: right; width: 50%;">
+### Specializations / minors
+
+* Dalhousie U.
+* McGill U.
+* U. of Toronto
+* U. of Victoria
+* U. of Waterloo
+* U. of Western Ontario
+
+</div>
+
+## MDS programs
+```{r echo=FALSE, message=FALSE, fig.height=4}
+# https://analytics.ncsu.edu/?page_id=4184
+dat <- data.frame(
+  year = seq(as.Date("2012-01-01"), as.Date("2019-12-31"), by="years"),
+  total = c(0,4,12,28,35,56,69,73)
+)
+  
+dat %>% 
+  ggplot(aes(x=year, y=total)) +
+  geom_col(fill="steelblue") +
+  # Label by year
+  scale_x_date(date_labels="%Y", date_breaks="1 year") +
+  
+  # Beautify
+  labs(x="", y="Total US programs") +
+  theme_classic() +
+  theme(text = element_text(size=20),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+<center><font size="4">(Michael Rappa, NC State University)</font></center>
+

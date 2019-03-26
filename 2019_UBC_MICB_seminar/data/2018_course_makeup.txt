@@ -1,0 +1,7 @@
+Major	301	322	323	405	421	425	447
+MICB/MBIM	88	84	73	21	41	23	26
+CPSC	18			16		3	
+BIOT				22	12	7	2
+Other Science	10			16		3	
+Other Faculties	5			5	3	7	
+MS/PhD				4		3	
