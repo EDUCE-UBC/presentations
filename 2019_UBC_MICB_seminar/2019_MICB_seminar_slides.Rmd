@@ -9,6 +9,9 @@ urlcolor: blue
 editor_options: 
   chunk_output_type: console
 ---
+<style> 
+  #nudge_up > p {margin-top: -30px;} 
+</style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
@@ -37,6 +40,12 @@ library(tidyverse)
 library(ggthemes)
 library(scales)
 library(DiagrammeR)
+#Exact and Monte Carlo symmetry tests for paired contigency tables
+library(rcompanion)
+```
+```{r survey data, echo=FALSE, message=FALSE, warning=FALSE}
+# Cleaned in EDUCE/Survey_analysis/Survey_analysis_MICB2019
+survey <- read_csv("data/2017.18.19_survey_clean.csv")
 ```
 
 ## Data science
@@ -80,7 +89,7 @@ p1 <- read_tsv("data/sequencing_costs_table_july_2017.txt") %>%
                      breaks = c(0.1,1,10,100,1000,10000)) +
   # Beautify
   labs(x="", y="Cost per\n Megabase (USD)") +
-  theme_classic() +
+  theme_bw() +
   theme(text = element_text(size=20),
         axis.text.x = element_text(angle = 45, hjust = 1))
 
@@ -281,11 +290,40 @@ grViz("
 ")
 ```
 
+## Students impacted per year {#nudge_up}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.height=5, fig.width=8.5}
+read_tsv("data/2018_course_makeup.txt") %>% 
+  # Add total summed variable
+  mutate(Total = rowSums(.[2:8], na.rm=TRUE)) %>% 
+  # Reoder majors factor
+  mutate(major_ord = factor(Major, levels=c("MS/PhD","Other Faculties","Other Science","BIOT","CPSC","MICB/MBIM"))) %>% 
+
+  # Gather
+  gather(key=course, value=count, "301":"447", Total) %>% 
+  na.omit() %>% 
+  
+  ggplot() + 
+  geom_point(aes(x=as.factor(course), y=major_ord, 
+                 size=as.numeric(count), color=as.factor(course))) +
+  # Size parameters, modify legend
+  scale_size_continuous(name="Number \nof students", range = c(0,20),
+                        limits=c(0,356), breaks=c(5,10,20,40,80,160,320)) +
+  # Remove color legend
+  scale_color_discrete(guide=FALSE) +
+  # Add vertical dividers
+  geom_vline(xintercept=7.4, size=1) +
+  #Beautify
+  labs(x="MICB course", y="Undergraduate major") +
+  theme_bw(base_size = 16) +
+  theme(text = element_text(size=20)) +
+  scale_y_discrete(labels=c("MS / PhD", "Other\nFaculties", "Other\nScience", "Biotech", "Computer\nScience", "M&I"))
+```
+
 ## Example student
 
 ## MICB 301
 ```{r echo=FALSE, message=FALSE, fig.align="center"}
-M301 <- grViz("
+grViz("
       digraph {
       # Cmd line statements
       node[shape=box, fontname=Helvetica,
@@ -336,12 +374,11 @@ M301 <- grViz("
       M[label='ANOVA and \nlinear regression']
       }
       ")
-M301
 ```
 
-## MICB 301 - MICB 322
+## MICB 301 - 322
 ```{r echo=FALSE, message=FALSE, fig.align="center"}
-M322 <- grViz("
+grViz("
       digraph {
       # Cmd line statements
       node[shape=box, fontname=Helvetica,
@@ -396,12 +433,11 @@ M322 <- grViz("
       M[label='ANOVA and \nlinear regression']
       }
       ")
-M322
 ```
 
 ## MICB 301 - 322 - 405
 ```{r echo=FALSE, message=FALSE, fig.align="center"}
-M405 <- grViz("
+grViz("
       digraph {
       # R statements
       node[shape=box, fontname=Helvetica,
@@ -446,12 +482,11 @@ M405 <- grViz("
       M[label='ANOVA and \nlinear regression']
       }
       ")
-M405
 ```
 
 ## MICB 301 - 322 - 405 - 425
 ```{r echo=FALSE, message=FALSE, fig.align="center"}
-M425 <- grViz("
+grViz("
       digraph {
       # Student example
       node[shape=box, fontname=Helvetica,
@@ -491,7 +526,6 @@ M425 <- grViz("
       M[label='ANOVA and \nlinear regression']
       }
       ")
-M425
 ```
 
 ## Example student
@@ -519,6 +553,7 @@ knitr::include_graphics("images/M425.png")
 1. Faculty training
 
 >* _Dedicated Postdoctoral Teaching and Learning Fellow_
+* _Cross-disciplinary TAs from multiple departments_
 
 <br>
 
@@ -546,45 +581,239 @@ knitr::include_graphics("images/M425.png")
 >* _Stripped down datasets and use of cloud resources_
 >* _Open-source tools and curricula_
 
-## Students impacted per year
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.height=5, fig.width=8.5}
-read_tsv("data/2018_course_makeup.txt") %>% 
-  # Add total summed variable
-  mutate(Total = rowSums(.[2:8], na.rm=TRUE)) %>% 
-  # Reoder majors factor
-  mutate(major_ord = factor(Major, levels=c("MS/PhD","Other Faculties","Other Science","BIOT","CPSC","MICB/MBIM"))) %>% 
+# Does EDUCE effectively teach data science skills<br>to M&I students?
+# MICB 301<br>as a case study
+## EDUCE in MICB 301
 
-  # Gather
-  gather(key=course, value=count, "301":"447", Total) %>% 
-  na.omit() %>% 
-  
-  ggplot() + 
-  geom_point(aes(x=as.factor(course), y=major_ord, 
-                 size=as.numeric(count), color=as.factor(course))) +
-  # Size parameters, modify legend
-  scale_size_continuous(name="Number \nof students", range = c(0,20),
-                        limits=c(0,356), breaks=c(5,10,20,40,80,160,320)) +
-  # Remove color legend
-  scale_color_discrete(guide=FALSE) +
-  # Add vertical dividers
-  geom_vline(xintercept=7.4, size=1) +
-  #Beautify
-  labs(x="MICB course", y="Undergraduate major") +
-  theme_classic(base_size = 16) +
-  theme(text = element_text(size=20)) +
-  scale_y_discrete(labels=c("MS / PhD", "Other\nFaculties", "Other\nScience", "Biotech", "Computer\nScience", "M&I"))
+* 5 x 50 min class sessions across 5 weeks
+* Weekly assignments and a final report
+
+<br>
+
+* Introduction to
+    - data science
+    - R/RStudio
+    - statistics
+
+* Simple plots and running a *t*-test in R
+
+## Increased interest in data science {#nudge_up}
+How would you rate your interest in...
+
+<br>
+
+```{r interest, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.75, fig.width=8.5}
+interest <- survey %>% 
+  select(Course, year,
+         Pre_Interest_BI, Post_Interest_BI,
+         Pre_Interest_CPSC, Post_Interest_CPSC) %>% 
+  filter(Course== "MICB301") %>% 
+  # Select matched pre-post
+  drop_na() %>% 
+  #Gather pre/post data
+  gather("subject", "interest", -Course, -year) %>% 
+  drop_na(interest) %>% 
+  # Create separate pre/post column
+  separate(subject, into=c("survey","trash","subject"), sep="_") %>% 
+  # Convert numeric survey respones to groups
+  ## None=0, low=1-3, med=4-7, high=8-10
+  mutate(interest_cat = ifelse(interest == "0", "None",
+                        ifelse(interest %in% c("1","2","3"), "Low",
+                        ifelse(interest %in% c("4","5","6","7"), "Medium",
+                        ifelse(interest %in% c("8","9","10"), "High",
+                        interest))))) %>% 
+  #Reorder groups
+  mutate(survey =  factor(survey, levels = c("Pre", "Post")),
+         interest_cat = factor(interest_cat,
+                               levels=c("High","Medium","Low","None"))) %>% 
+  select(-trash) %>% 
+  group_by(Course, survey, subject, interest_cat) %>% 
+  summarize(n=n()) %>% 
+  mutate(freq=100*n/sum(n))
+
+p_interest <- ggplot(interest, aes(x=survey, y=freq, fill=interest_cat)) + 
+  geom_col(position = "fill") +
+  labs(x="Survey", y="Proportion of responses", fill="") +
+  facet_grid(~subject, labeller = as_labeller(c("BI"="Bioinformatics\n", "CPSC"="Computer science\n"))) +
+  theme_bw(base_size = 16) +
+  theme(text = element_text(size=20), 
+        panel.spacing = unit(2, "lines")) +
+  scale_x_discrete(labels=c("Pre","Post")) +
+  scale_fill_brewer(palette = "Blues", direction=-1)+
+  scale_y_continuous(labels=scales::percent)
+
+p_interest
 ```
 
+## Increased interest in data science {#nudge_up}
+How would you rate your interest in...
 
-## 
+<br>
 
-## Acknowledgements
+```{r interest2, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.75, fig.width=8.5}
+p_interest +
+  geom_segment(aes(x = 1, y = 0.5, xend = 2, yend = 0.8),
+  arrow = arrow(length = unit(0.03, "npc"))) +
+  facet_grid(~subject, labeller = as_labeller(c("BI"="Bioinformatics\nP = 0.023", "CPSC"="Computer science\nP = 0.093")))
+```
 
-## References
-Attwood _et al_ 10.1093/bib/bbx100
-Williams _et al_ 10.1101/204420
+## Except... {.flexbox .vcenter}
 
-(Williams & Teal 10.1111/nyas.13207)
+<center><font size="6">No significant changes in interest in statistics</font></center>
+
+## Increased experience in data science {#nudge_up}
+What level of experience do you have in ...
+
+<br>
+
+```{r exp, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.75, fig.width=8.5}
+exp <- survey %>% 
+  select(Course, year,
+         Pre_Exp_BI,   Post_Exp_BI,
+         Pre_Exp_CPSC, Post_Exp_CPSC) %>% 
+  filter(Course == "MICB301") %>% 
+  # Select matched pre-post
+  drop_na() %>% 
+  #Gather pre/post data
+  gather("subject", "exp", -Course, -year) %>% 
+  # Create separate pre/post column
+  separate(subject, into=c("survey","trash","subject"), sep="_") %>% 
+  # Convert numeric survey respones to groups
+  ## None=0, low=1-3, med=4-7, high=8-10
+  mutate(exp_cat = ifelse(exp == "0", "None",
+                        ifelse(exp %in% c("1","2","3"), "Low",
+                        ifelse(exp %in% c("4","5","6"), "Medium",
+                        ifelse(exp %in% c("7","8"), "High",
+                        ifelse(exp %in% c("9","10"), "veryHigh",
+                        exp)))))) %>% 
+  #Reorder groups
+  mutate(survey =  factor(survey, levels = c("Pre", "Post")),
+         exp_cat = factor(exp_cat,
+                               levels=c("veryHigh","High","Medium","Low","None")),
+         subject = factor(subject, levels=c("BI","CPSC"))) %>% 
+  select(-trash) %>% 
+  group_by(Course, survey, subject, exp_cat) %>% 
+  summarize(n=n()) %>% 
+  mutate(freq=100*n/sum(n))
+
+p_exp <- ggplot(exp, aes(x=survey, y=freq)) + 
+  geom_col(aes(fill=exp_cat), position = "fill") +
+  labs(x="Survey", y="Proportion of responses", fill="") +
+  facet_grid(~subject, labeller = as_labeller(
+    c("BI"="Bioinformatics \n\n\n",
+      "CPSC"="Computer science \n\n\n"))) +
+  theme_bw(base_size = 16) +
+  theme(text = element_text(size=20), 
+        panel.spacing = unit(2, "lines")) +
+  scale_x_discrete(labels=c("Pre","Post")) +
+  scale_fill_brewer(palette = "Blues", direction=-1, 
+                    labels=c("Very high","High","Medium","Low","None")) +
+  scale_y_continuous(labels=scales::percent)
+
+p_exp
+```
+
+## Increased experience in data science {#nudge_up}
+What level of experience do you have in ...
+
+<br>
+
+```{r exp2, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.75, fig.width=8.5}
+arrow_bi<-data.frame(
+  x=1,xend=2, y1=0.6,yend1=0.85, y2=0.2,yend2=0.35, y3=0.2,yend3=0.8, 
+  subject=factor("BI", levels=c("BI","CPSC","MICB")))
+
+arrow_cpsc<-data.frame(
+  x=1, xend=2, y1=0.2,yend1=0.4, y2=0.5,yend2=0.75,
+  subject=factor("CPSC", levels=c("BI","CPSC","MICB")))
+
+p_exp +
+  geom_segment(data=arrow_bi, aes(x=x, y=y1, xend=xend, yend=yend1), 
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  geom_segment(data=arrow_bi, aes(x=x, y=y2, xend=xend, yend=yend2), 
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  geom_segment(data=arrow_bi, aes(x=x, y=y3, xend=xend, yend=yend3), 
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  
+  geom_segment(data=arrow_cpsc, aes(x=x, y=y1, xend=xend, yend=yend1), 
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  geom_segment(data=arrow_cpsc, aes(x=x, y=y2, xend=xend, yend=yend2), 
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  
+facet_grid(~subject, labeller = as_labeller(
+    c("BI"="Bioinformatics\n P = 3.23E-2\n P = 3.29E-5\n P = 6.15E-8",
+      "CPSC"="Computer science\n P = 1.94E-3\n P = 7.44E-2\n ")))
+```
+
+## Except... {.flexbox .vcenter}
+
+<center><font size="6">No significant changes in experience in statistics</font></center>
+
+## Conclusions
+
+>* Data science literacy is a necessary component of undergraduate education across many disclipines, including the life sciences
+
+>* EDUCE provides a flexible, modular approach for integrating data science into life science curriculum
+
+>* Even minimal exposure (5 hours) can increase student self-reported interest and experience in data science areas 
+
+## The future
+
+* A wealth of survey data to mine
+
+* Repetition across 3 years for statistical analyses
+
+* More courses? Other departments? 
+
+## Acknowledgements {#nudge_up}
+<div style="float: left; width: 50%;">
+
+**Steven Hallam**  
+**Jennifer Bonderoff**
+
+### *EDUCE TAs*
+
+**Yue Liu (App MATH)**  
+Julia Beni (U. Minnesota)  
+Kris Hong (CPSC, STAT)  
+Jonah Lin (MICB, CPSC)  
+Lisa McEwen (MedGen)  
+Ryan McLaughlin (BINFO)  
+Connor Morgan-Lang (BINFO)  
+Nolan Shelley (Botany)  
+David Yin (CPSC, STAT)
+
+</div>
+
+<div style="float: right; width: 50%;">
+### *Course instructors*
+
+Sean Crowe  
+Lindsay Eltis  
+Jennifer Gardy  
+Marcia Graves  
+Martin Hirst  
+Bill Mohn  
+Dave Oliver  
+Jen Sibley
+
+### *Collaborators*
+
+Gaby Cohen-Freue (STAT)  
+Patrick Walls (MATH)  
+Biljana Stojkova (ASDa)
+
+</div>
+
+## Funding
+
+UBC Teaching and Learning Enhancement Fund (TLEF)
+
+NSERC CREATE Program (ECOSCOPE)
+
+Department of Microbiology & Immunology
+
+UBC Skylight and the Center for Teaching, Learning and Technology (CTLT)
 
 ## Opportunities at UBC
 
@@ -594,6 +823,60 @@ Williams _et al_ 10.1101/204420
 
 * Master of Data Science - Postdoctoral Teaching and Learning Fellow (https://www.stat.ubc.ca/postdoctoral-teaching-and-learning-fellow-ubc-master-data-science-program-0)
 
+
+## References
+Attwood TK _et al_ 2017. _A global perspective on evolving bioinformatics and
+data science training needs._ Brief Bioinform. 20(2):398-404. doi: [10.1093/bib/bbx100](https://www.ncbi.nlm.nih.gov/pubmed/28968751)
+
+Williams JJ _et al_ 2017. _Barriers to integration of bioinformatics into undergraduate life sciences education._ BioRxiv. doi: [10.1101/204420](https://www.biorxiv.org/content/10.1101/204420v1)
+
+Williams JJ & Teal TK. 2017. _A vision for collaborative training infrastructure
+for bioinformatics._ Ann N Y Acad Sci. 1387(1):54-60_ doi: [10.1111/nyas.13207](https://www.ncbi.nlm.nih.gov/pubmed/27603332)
+
+## Some prior experience {#nudge_up}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.width=8}
+survey %>% 
+  select(Course, Prev_unix, Prev_R, Prev_R, year) %>% 
+  filter(Course %in% c("MICB301", "MICB405", "MICB425"),
+         year=="2017/18") %>% 
+  #Gather pre/post data
+  gather("group", "YN", Prev_unix, Prev_R) %>% 
+  mutate(YN = ifelse(is.na(YN), "No","Yes")) %>% 
+
+ggplot(aes(x=Course, fill=YN)) + 
+  geom_bar(position = "fill") +
+  labs(x="Course", y="Proportion of responses", fill="") +
+  facet_wrap(~group, labeller=as_labeller(c("Prev_R"="Previous R experience", "Prev_unix"="Previous Unix experience"))) +
+  theme_bw(base_size = 16) +
+  theme(text = element_text(size=20), 
+        panel.spacing = unit(2, "lines")) +
+  scale_x_discrete(labels=c("301","405","425"))
+```
+
+## Minimal prior knowledge {#nudge_up}
+Have you heard the term 'data science'? 
+
+<br>
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.55, fig.width=8.5}
+survey %>% 
+  select(Course, Pre_DS, Post_DS, year) %>% 
+  filter(Course %in% c("MICB301", "MICB405", "MICB425")) %>% 
+  #Gather pre/post data
+  gather("group", "DS", Pre_DS,Post_DS) %>% 
+  drop_na(DS) %>% 
+  #Reorder groups
+  mutate(group =  factor(group, levels = c("Pre_DS", "Post_DS"))) %>%
+
+ggplot(aes(x=group, y=..prop.., group=DS, fill=DS)) + 
+  geom_bar(position = "fill") +
+  labs(x="Survey", y="Proportion of responses", fill="")+
+  facet_grid(year~Course) +
+  theme_bw(base_size = 16) +
+  theme(text = element_text(size=20), 
+        panel.spacing = unit(2, "lines")) +
+  scale_x_discrete(labels=c("Pre","Post"))
+```
 
 ## GenBank sequences
 ```{r echo=FALSE, message=FALSE, fig.height=3}
@@ -613,7 +896,7 @@ read_tsv("data/GanBank_seqs.txt") %>%
                      breaks=c(1E6,1E8,1E10,1E12)) +
   # Beautify
   labs(x="", y="Total basepairs\nin GenBank") +
-  theme_classic() +
+  theme_bw() +
   theme(text = element_text(size=20),
         axis.text.x = element_text(angle = 45, hjust = 1))
 ```
@@ -662,7 +945,7 @@ dat %>%
   
   # Beautify
   labs(x="", y="Total US programs") +
-  theme_classic() +
+  theme_bw() +
   theme(text = element_text(size=20),
         axis.text.x = element_text(angle = 45, hjust = 1))
 ```
