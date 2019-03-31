@@ -165,7 +165,7 @@ knitr::include_graphics("images/news_clippings.png")
 
 <br>
 
-<font size="7"><span style="color:teal">**E**</span>xperiential  
+<font size="6"><span style="color:teal">**E**</span>xperiential  
 <span style="color:teal">**D**</span>ata science for  
 <span style="color:teal">**U**</span>ndergraduate  
 <span style="color:teal">**C**</span>ross-disciplinary  
@@ -181,7 +181,8 @@ knitr::include_graphics("images/news_clippings.png")
 
 <center><font size="6">Modular integration of  
 data science curriculum into  
-existing courses</font></center>
+existing courses  
+</font></center>
 
 ## Content overview
 ```{r echo=FALSE, message=FALSE, fig.align="center"}
@@ -751,9 +752,9 @@ facet_grid(~subject, labeller = as_labeller(
 
 ## Conclusions
 
->* Data science literacy is a necessary component of undergraduate education across many disclipines, including the life sciences
+>* Data science literacy is needed in the life sciences
 
->* EDUCE provides a flexible, modular approach for integrating data science into life science curriculum
+>* EDUCE provides a flexible, modular approach for integrating data science into undergraduate curriculum
 
 >* Even minimal exposure (5 hours) can increase student self-reported interest and experience in data science areas 
 
@@ -764,6 +765,8 @@ facet_grid(~subject, labeller = as_labeller(
 * Repetition across 3 years for statistical analyses
 
 * More courses? Other departments? 
+
+* Faculty of Science Data Science Committee
 
 ## Acknowledgements {#nudge_up}
 <div style="float: left; width: 50%;">
@@ -817,11 +820,15 @@ UBC Skylight and the Center for Teaching, Learning and Technology (CTLT)
 
 ## Opportunities at UBC
 
-* EDUCE - Postdoctoral Teaching and Learning Fellow (<http://ecoscope.ubc.ca/program-structure/educe/educe-postdoctoral-application>)
+**Postdoctoral Teaching and Learning Fellow**
+
+* EDUCE  
+<http://ecoscope.ubc.ca/program-structure/educe/educe-postdoctoral-application>
 
 <br>
 
-* Master of Data Science - Postdoctoral Teaching and Learning Fellow (https://www.stat.ubc.ca/postdoctoral-teaching-and-learning-fellow-ubc-master-data-science-program-0)
+* Master of Data Science  
+<https://www.stat.ubc.ca/postdoctoral-teaching-and-learning-fellow-ubc-master-data-science-program-0>
 
 
 ## References
@@ -833,50 +840,6 @@ Williams JJ _et al_ 2017. _Barriers to integration of bioinformatics into underg
 Williams JJ & Teal TK. 2017. _A vision for collaborative training infrastructure
 for bioinformatics._ Ann N Y Acad Sci. 1387(1):54-60_ doi: [10.1111/nyas.13207](https://www.ncbi.nlm.nih.gov/pubmed/27603332)
 
-## Some prior experience {#nudge_up}
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.width=8}
-survey %>% 
-  select(Course, Prev_unix, Prev_R, Prev_R, year) %>% 
-  filter(Course %in% c("MICB301", "MICB405", "MICB425"),
-         year=="2017/18") %>% 
-  #Gather pre/post data
-  gather("group", "YN", Prev_unix, Prev_R) %>% 
-  mutate(YN = ifelse(is.na(YN), "No","Yes")) %>% 
-
-ggplot(aes(x=Course, fill=YN)) + 
-  geom_bar(position = "fill") +
-  labs(x="Course", y="Proportion of responses", fill="") +
-  facet_wrap(~group, labeller=as_labeller(c("Prev_R"="Previous R experience", "Prev_unix"="Previous Unix experience"))) +
-  theme_bw(base_size = 16) +
-  theme(text = element_text(size=20), 
-        panel.spacing = unit(2, "lines")) +
-  scale_x_discrete(labels=c("301","405","425"))
-```
-
-## Minimal prior knowledge {#nudge_up}
-Have you heard the term 'data science'? 
-
-<br>
-
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.55, fig.width=8.5}
-survey %>% 
-  select(Course, Pre_DS, Post_DS, year) %>% 
-  filter(Course %in% c("MICB301", "MICB405", "MICB425")) %>% 
-  #Gather pre/post data
-  gather("group", "DS", Pre_DS,Post_DS) %>% 
-  drop_na(DS) %>% 
-  #Reorder groups
-  mutate(group =  factor(group, levels = c("Pre_DS", "Post_DS"))) %>%
-
-ggplot(aes(x=group, y=..prop.., group=DS, fill=DS)) + 
-  geom_bar(position = "fill") +
-  labs(x="Survey", y="Proportion of responses", fill="")+
-  facet_grid(year~Course) +
-  theme_bw(base_size = 16) +
-  theme(text = element_text(size=20), 
-        panel.spacing = unit(2, "lines")) +
-  scale_x_discrete(labels=c("Pre","Post"))
-```
 
 ## GenBank sequences
 ```{r echo=FALSE, message=FALSE, fig.height=3}
@@ -952,3 +915,48 @@ dat %>%
 
 <center><font size="4">(Michael Rappa, NC State University)</font></center>
 
+
+## Some prior experience {#nudge_up}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.width=8}
+survey %>% 
+  select(Course, Prev_unix, Prev_R, Prev_R, year) %>% 
+  filter(Course %in% c("MICB301", "MICB405", "MICB425"),
+         year=="2017/18") %>% 
+  #Gather pre/post data
+  gather("group", "YN", Prev_unix, Prev_R) %>% 
+  mutate(YN = ifelse(is.na(YN), "No","Yes")) %>% 
+
+ggplot(aes(x=Course, fill=YN)) + 
+  geom_bar(position = "fill") +
+  labs(x="Course", y="Proportion of responses", fill="") +
+  facet_wrap(~group, labeller=as_labeller(c("Prev_R"="Previous R experience", "Prev_unix"="Previous Unix experience"))) +
+  theme_bw(base_size = 16) +
+  theme(text = element_text(size=20), 
+        panel.spacing = unit(2, "lines")) +
+  scale_x_discrete(labels=c("301","405","425"))
+```
+
+## Minimal prior knowledge {#nudge_up}
+Have you heard the term 'data science'? 
+
+<br>
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.55, fig.width=8.5}
+survey %>% 
+  select(Course, Pre_DS, Post_DS, year) %>% 
+  filter(Course %in% c("MICB301", "MICB405", "MICB425")) %>% 
+  #Gather pre/post data
+  gather("group", "DS", Pre_DS,Post_DS) %>% 
+  drop_na(DS) %>% 
+  #Reorder groups
+  mutate(group =  factor(group, levels = c("Pre_DS", "Post_DS"))) %>%
+
+ggplot(aes(x=group, y=..prop.., group=DS, fill=DS)) + 
+  geom_bar(position = "fill") +
+  labs(x="Survey", y="Proportion of responses", fill="")+
+  facet_grid(year~Course) +
+  theme_bw(base_size = 16) +
+  theme(text = element_text(size=20), 
+        panel.spacing = unit(2, "lines")) +
+  scale_x_discrete(labels=c("Pre","Post"))
+```
