@@ -18,7 +18,7 @@ editor_options:
 <script>
     $(document).ready(function() {
     $('slide:not(.title-slide, .backdrop, .segue)').append('<footer></footer>');    
-    $('footer').attr('label', 'Slides at bit.ly/M&I_EDUCE');
+    $('footer').attr('label', 'Slides at bit.ly/MICB_EDUCE');
 
   })
 </script>
