@@ -136,7 +136,72 @@ p1 +
 knitr::include_graphics("images/news_clippings.png")
 ```
 
+## Masters of data science
+```{r echo=FALSE, message=FALSE, fig.height=4}
+# https://analytics.ncsu.edu/?page_id=4184
+dat <- data.frame(
+  year = seq(as.Date("2012-01-01"), as.Date("2019-12-31"), by="years"),
+  total = c(0,4,12,28,35,56,69,73)
+)
+  
+dat %>% 
+  ggplot(aes(x=year, y=total)) +
+  geom_col(fill="steelblue") +
+  # Label by year
+  scale_x_date(date_labels="%Y", date_breaks="1 year") +
+  
+  # Beautify
+  labs(x="", y="Total US programs") +
+  theme_bw() +
+  theme(text = element_text(size=20),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+<center><font size="4">(Michael Rappa, NC State University)</font></center>
+
 # We need to teach<br>data science in undergraduate life<br>science curriculum.
+## An unmet need in M&I {#nudge_up}
+<br>
+<br>
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.55, fig.width=8}
+survey %>% 
+  select(Course, Prev_unix, Prev_R, Prev_R, year) %>% 
+  filter(Course == "MICB301") %>% 
+  #Gather pre/post data
+  gather("group", "YN", Prev_unix, Prev_R) %>% 
+  mutate(YN = ifelse(is.na(YN), "No","Yes")) %>% 
+
+ggplot(aes(x=year, fill=YN)) + 
+  geom_bar(position = "fill") +
+  labs(x="MICB 301", y="Proportion of responses", fill="") +
+  facet_wrap(~group, labeller=as_labeller(c("Prev_R"="Previous R experience", "Prev_unix"="Previous Unix experience"))) +
+  theme_bw(base_size = 16) +
+  theme(text = element_text(size=20), 
+        panel.spacing = unit(2, "lines"))
+```
+
+## An unmet need in M&I {#nudge_up}
+Have you heard the term _____________? 
+
+<br>
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.55, fig.width=8}
+survey %>% 
+  select(Course, Pre_DS, Pre_BI, year) %>% 
+  filter(Course == "MICB301") %>% 
+  #Gather pre/post data
+  gather("group", "YN", Pre_DS, Pre_BI) %>% 
+  drop_na(YN) %>% 
+
+ggplot(aes(x=year, y=..prop.., group=YN, fill=YN)) + 
+  geom_bar(position = "fill") +
+  labs(x="MICB 301", y="Proportion of responses", fill="")+
+  facet_grid(~group, labeller=as_labeller(c("Pre_DS"="Data science", "Pre_BI"="Bioinformatics"))) +
+  theme_bw(base_size = 16) +
+  theme(text = element_text(size=20), 
+        panel.spacing = unit(2, "lines")) 
+```
 
 ## Barriers to data science integration
   
@@ -289,35 +354,6 @@ grViz("
       H[label='UBC/BCIT \nBiotechnology \nprogram']
     }
 ")
-```
-
-## Students impacted per year {#nudge_up}
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.height=5, fig.width=8.5}
-read_tsv("data/2018_course_makeup.txt") %>% 
-  # Add total summed variable
-  mutate(Total = rowSums(.[2:8], na.rm=TRUE)) %>% 
-  # Reoder majors factor
-  mutate(major_ord = factor(Major, levels=c("MS/PhD","Other Faculties","Other Science","BIOT","CPSC","MICB/MBIM"))) %>% 
-
-  # Gather
-  gather(key=course, value=count, "301":"447", Total) %>% 
-  na.omit() %>% 
-  
-  ggplot() + 
-  geom_point(aes(x=as.factor(course), y=major_ord, 
-                 size=as.numeric(count), color=as.factor(course))) +
-  # Size parameters, modify legend
-  scale_size_continuous(name="Number \nof students", range = c(0,20),
-                        limits=c(0,356), breaks=c(5,10,20,40,80,160,320)) +
-  # Remove color legend
-  scale_color_discrete(guide=FALSE) +
-  # Add vertical dividers
-  geom_vline(xintercept=7.4, size=1) +
-  #Beautify
-  labs(x="MICB course", y="Undergraduate major") +
-  theme_bw(base_size = 16) +
-  theme(text = element_text(size=20)) +
-  scale_y_discrete(labels=c("MS / PhD", "Other\nFaculties", "Other\nScience", "Biotech", "Computer\nScience", "M&I"))
 ```
 
 ## Example student
@@ -583,9 +619,39 @@ knitr::include_graphics("images/M425.png")
 >* _Open-source tools and curricula_
 
 # Does EDUCE effectively teach data science skills<br>to M&I students?
+## Students impacted per year {#nudge_up}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.height=5, fig.width=8.5}
+read_tsv("data/2018_course_makeup.txt") %>% 
+  # Add total summed variable
+  mutate(Total = rowSums(.[2:8], na.rm=TRUE)) %>% 
+  # Reoder majors factor
+  mutate(major_ord = factor(Major, levels=c("MS/PhD","Other Faculties","Other Science","BIOT","CPSC","MICB/MBIM"))) %>% 
+
+  # Gather
+  gather(key=course, value=count, "301":"447", Total) %>% 
+  na.omit() %>% 
+  
+  ggplot() + 
+  geom_point(aes(x=as.factor(course), y=major_ord, 
+                 size=as.numeric(count), color=as.factor(course))) +
+  # Size parameters, modify legend
+  scale_size_continuous(name="Number \nof students", range = c(0,20),
+                        limits=c(0,356), breaks=c(5,10,20,40,80,160,320)) +
+  # Remove color legend
+  scale_color_discrete(guide=FALSE) +
+  # Add vertical dividers
+  geom_vline(xintercept=7.4, size=1) +
+  #Beautify
+  labs(x="MICB course", y="Undergraduate major") +
+  theme_bw(base_size = 16) +
+  theme(text = element_text(size=20)) +
+  scale_y_discrete(labels=c("MS / PhD", "Other\nFaculties", "Other\nScience", "Biotech", "Computer\nScience", "M&I"))
+```
+
 # MICB 301<br>as a case study
 ## EDUCE in MICB 301
 
+* ~120 students / yr
 * 5 x 50 min class sessions across 5 weeks
 * Weekly assignments and a final report
 
@@ -597,6 +663,78 @@ knitr::include_graphics("images/M425.png")
     - statistics
 
 * Simple plots and running a *t*-test in R
+
+## Increased awareness of data science {#nudge_up}
+Have you heard the term _____________? 
+
+<br>
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.55, fig.width=8}
+survey %>% 
+  select(Course, Pre_DS, Post_DS,
+         Pre_BI, Post_BI, year) %>% 
+  filter(Course == "MICB301") %>% 
+  #Gather pre/post data
+  gather("group", "YN", Pre_DS, Pre_BI, Post_DS, Post_BI) %>% 
+  drop_na(YN) %>% 
+  separate(group, into=c("survey","term"), sep="_") %>% 
+  mutate(survey = factor(survey, levels = c("Pre", "Post"))) %>% 
+
+ggplot(aes(x=survey, y=..prop.., group=YN, fill=YN)) + 
+  geom_bar(position = "fill") +
+  labs(x="Survey", y="Proportion of responses", fill="") +
+  facet_grid(~term, labeller=as_labeller(c("DS"="Data science", "BI"="Bioinformatics"))) +
+  theme_bw(base_size = 16) +
+  theme(text = element_text(size=20), 
+        panel.spacing = unit(2, "lines")) 
+```
+
+## Definitions of data science {#nudge_up}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+#Create word lists
+survey %>% 
+  filter(Course =="MICB301") %>% 
+  select(Pre_DS_define) %>% 
+  mutate(Pre_DS_define = str_to_lower(Pre_DS_define)) %>% 
+  mutate(Pre_DS_define = str_replace(Pre_DS_define, 
+                  "data science", "")) %>%
+  write_tsv("data/Pre_DS.txt")
+
+survey %>% 
+  filter(Course =="MICB301") %>% 
+  select(Pre_BI_define) %>% 
+  mutate(Pre_BI_define = str_to_lower(Pre_BI_define)) %>% 
+  mutate(Pre_BI_define = str_replace_all(Pre_BI_define, 
+                  c("bioinformatic"="", "bioinformatics"=""))) %>%
+  write_tsv("data/Pre_BI.txt")
+
+survey %>% 
+  filter(Course =="MICB301") %>% 
+  select(Post_DS_define) %>% 
+  mutate(Post_DS_define = str_to_lower(Post_DS_define)) %>%
+  mutate(Post_DS_define = str_replace(Post_DS_define, 
+                  "data science", "")) %>%
+  write_tsv("data/Post_DS.txt")
+
+survey %>% 
+  filter(Course =="MICB301") %>% 
+  select(Post_BI_define) %>% 
+  mutate(Post_BI_define = str_to_lower(Post_BI_define)) %>% 
+  mutate(Post_BI_define = str_replace_all(Post_BI_define, 
+                  c("bioinformatic"="", "bioinformatics"=""))) %>%
+  write_tsv("data/Post_BI.txt")
+
+#Make word clouds using https://www.wordclouds.com/
+```
+
+```{r echo=FALSE, fig.align="center", out.width="70%", out.height="70%"}
+knitr::include_graphics("images/Post_DS_wordcloud.png")
+```
+
+## Definitions of bioinformatics {#nudge_up}
+```{r echo=FALSE, fig.align="center", out.width="70%", out.height="70%"}
+knitr::include_graphics("images/Post_BI_wordcloud.png")
+```
 
 ## Increased interest in data science {#nudge_up}
 How would you rate your interest in...
@@ -756,17 +894,17 @@ facet_grid(~subject, labeller = as_labeller(
 
 >* EDUCE provides a flexible, modular approach for integrating data science into undergraduate curriculum
 
->* Even minimal exposure (5 hours) can increase student self-reported interest and experience in data science areas 
+>* Even minimal exposure (5 hours) can increase student self-reported knowledge, interest, and experience in data science areas 
 
 ## The future
 
-* A wealth of survey data to mine
-
-* Repetition across 3 years for statistical analyses
+* A wealth of survey data
 
 * More courses? Other departments? 
 
-* Faculty of Science Data Science Committee
+* Faculty of Science Data Science Curriculum Committee
+
+* Independent learning tools <https://ubc-educe.shinyapps.io/course_knitter/>
 
 ## Acknowledgements {#nudge_up}
 <div style="float: left; width: 50%;">
@@ -839,124 +977,3 @@ Williams JJ _et al_ 2017. _Barriers to integration of bioinformatics into underg
 
 Williams JJ & Teal TK. 2017. _A vision for collaborative training infrastructure
 for bioinformatics._ Ann N Y Acad Sci. 1387(1):54-60_ doi: [10.1111/nyas.13207](https://www.ncbi.nlm.nih.gov/pubmed/27603332)
-
-
-## GenBank sequences
-```{r echo=FALSE, message=FALSE, fig.height=3}
-read_tsv("data/GanBank_seqs.txt") %>% 
-  filter(Date <= as.Date("2018-12-31")) %>% 
-  
-  ggplot(aes(x=Date, y=Bases)) +
-  geom_point() +
-  geom_line() +
-  # Force y axis limit up to 10,000. ylim and limits did not work
-  geom_point(aes(x=as.Date("1982-12-01"), y=1000000000000), color="white") +
-  # Label by year
-  scale_x_date(date_labels="%Y", date_breaks="2 year") +
-  # Log scale cost
-  scale_y_continuous(trans="log",
-                     labels=scientific,
-                     breaks=c(1E6,1E8,1E10,1E12)) +
-  # Beautify
-  labs(x="", y="Total basepairs\nin GenBank") +
-  theme_bw() +
-  theme(text = element_text(size=20),
-        axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-## Undergraduate programs
-<div style="float: left; width: 50%;">
-### BSc in Bioinformatics
-
-* U. of Montreal
-* U. Saskatchewan
-* U. Calgary
-* Carleton U.
-
-### Joint BSc degrees
-
-* Simon Fraser U.
-* U. of British Columbia
-
-</div>
-
-<div style="float: right; width: 50%;">
-### Specializations / minors
-
-* Dalhousie U.
-* McGill U.
-* U. of Toronto
-* U. of Victoria
-* U. of Waterloo
-* U. of Western Ontario
-
-</div>
-
-## MDS programs
-```{r echo=FALSE, message=FALSE, fig.height=4}
-# https://analytics.ncsu.edu/?page_id=4184
-dat <- data.frame(
-  year = seq(as.Date("2012-01-01"), as.Date("2019-12-31"), by="years"),
-  total = c(0,4,12,28,35,56,69,73)
-)
-  
-dat %>% 
-  ggplot(aes(x=year, y=total)) +
-  geom_col(fill="steelblue") +
-  # Label by year
-  scale_x_date(date_labels="%Y", date_breaks="1 year") +
-  
-  # Beautify
-  labs(x="", y="Total US programs") +
-  theme_bw() +
-  theme(text = element_text(size=20),
-        axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-<center><font size="4">(Michael Rappa, NC State University)</font></center>
-
-
-## Some prior experience {#nudge_up}
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.width=8}
-survey %>% 
-  select(Course, Prev_unix, Prev_R, Prev_R, year) %>% 
-  filter(Course %in% c("MICB301", "MICB405", "MICB425"),
-         year=="2017/18") %>% 
-  #Gather pre/post data
-  gather("group", "YN", Prev_unix, Prev_R) %>% 
-  mutate(YN = ifelse(is.na(YN), "No","Yes")) %>% 
-
-ggplot(aes(x=Course, fill=YN)) + 
-  geom_bar(position = "fill") +
-  labs(x="Course", y="Proportion of responses", fill="") +
-  facet_wrap(~group, labeller=as_labeller(c("Prev_R"="Previous R experience", "Prev_unix"="Previous Unix experience"))) +
-  theme_bw(base_size = 16) +
-  theme(text = element_text(size=20), 
-        panel.spacing = unit(2, "lines")) +
-  scale_x_discrete(labels=c("301","405","425"))
-```
-
-## Minimal prior knowledge {#nudge_up}
-Have you heard the term 'data science'? 
-
-<br>
-
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.55, fig.width=8.5}
-survey %>% 
-  select(Course, Pre_DS, Post_DS, year) %>% 
-  filter(Course %in% c("MICB301", "MICB405", "MICB425")) %>% 
-  #Gather pre/post data
-  gather("group", "DS", Pre_DS,Post_DS) %>% 
-  drop_na(DS) %>% 
-  #Reorder groups
-  mutate(group =  factor(group, levels = c("Pre_DS", "Post_DS"))) %>%
-
-ggplot(aes(x=group, y=..prop.., group=DS, fill=DS)) + 
-  geom_bar(position = "fill") +
-  labs(x="Survey", y="Proportion of responses", fill="")+
-  facet_grid(year~Course) +
-  theme_bw(base_size = 16) +
-  theme(text = element_text(size=20), 
-        panel.spacing = unit(2, "lines")) +
-  scale_x_discrete(labels=c("Pre","Post"))
-```
