@@ -3,32 +3,24 @@ library(DiagrammeR)
 
 grViz("
       digraph {
-      # Base statements
+# Student example
       node[shape=box, fontname=Helvetica,
-      width=2, penwidth=2, fontsize=11, color=black]
-      A
+      width=2, penwidth=3, fontsize=16, color='#fc9272', style=filled]
+      H;I;L;M
       
-      # Cmd line statements
       node[shape=box, fontname=Helvetica,
-      width=2, penwidth=2, fontsize=11, color=lightblue]
-      B;D;E
+      width=2, penwidth=3, fontsize=16, color='#fee0d2', style=filled]
+      A;B;D;E;F;J
       
-      # R statements
-      node[shape=box, fontname=Helvetica,
-      width=2, penwidth=2, fontsize=11, color=steelblue]
-      F;H;I
-      
-      # Stat statements
-      node[shape=box, fontname=Helvetica,
-      width=2, penwidth=2, fontsize=11, color=darkgoldenrod1]
-      J;L;M
+      # edges
+      edge [color = black, arrowhead = vee, arrowtail = vee, penwidth=3]
       
       # edgestatements
       A->{B F J}
       B->D D->E
       F->H H->I
       J->L L->M
-      F->L F->M J->F
+      J->F F->J
       
       # define ranks
       subgraph {rank = same; B;F;J}
