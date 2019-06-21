@@ -1,0 +1,188 @@
+Pre_BI_define
+the science concerning the analysis of biological sequences.
+the study and analysis of genome.
+use of sequencing data to gather biological information (rather than conducting experiments)
+using data from biology-related experiments to prove/disprove a hypothesis
+s is the use of computer science and other technology to understand and study biological processes.
+using data to find meaningful trends in biology
+using a database of genomes to assess genes and protein function.
+collecting and analyzing data in a biology-related field
+using computational analysis to look at scientific data
+using data and data analysis in order to interpret biological data.
+the study of information in biology.
+using biological data (amino-acid sequences) to determine the characteristics of an individual.
+computerization of biological mechanisms. e.g: sequencing the human genome
+methods of using software to analyze biological data.
+s is using programming and technology to sequence genomes of organisms to learn more about  them and the genes they possess.
+s analysis looks at data like the transcriptome to determine the genes that are expressed for that certain cell. it would also look at the genome as well as the proteome, depending on the type of information that it would like to retrieve.
+informatics related to biology
+a type of science that involves biological data.
+analyzing large amounts of data about our biological systems
+methods to analyze biological data sets
+analyzing dna sequences to solve biological problems
+using computers to analyze stuff
+use of tools to understand biology
+the use of computer programs to examine biologically-related material.
+the science around sequencing genomes and biological information
+the analysis of biological data using computer programs or other technology to interpret results.
+technology used to arrange biological informaiton.
+using technology such as computer programs to analyze data collected.
+analysis of data relevant to the field of biology using computer technology
+using data science/ informatics for analyzing biological data.
+data processing as applied to biology, typically genomic analysis
+n/a
+computational tools to collect and analyze biological data.
+information (large amounts of data) that allow researchers to draw conclusions for different life forms.
+data science of biological systems
+the use of computers and software to analyze biological data.
+using various approaches, such as statistics and technology, to gather information and interpret results of biological data.
+complex biological data such as genetic code
+the use of dna sequencing or other indirect methods of learning more about an organism rather than attempting to cultivate the bacteria, rather than designing an experiment to deduce the function of a protein, s is comparing the sequence to known protein sequences and their respective functions in order to attempt to understand protein function, which is much faster.
+the field combining biology, statistics, and computer science to analyze biological data and enhance understanding.
+s refers to using technology to infer information about a certain thing, such as a genome.
+use of computers to do things humans couldn't do in the field of biology
+science of using  tools to anaylisis data.
+interpreting biological data using various forms of technology and statistical methods.
+using statistics to analyze data in a biology-related field.
+s is the discipline of analyzing experimental data to unveil trends and patterns and infer more information from said data.
+the use of computing and software systems for biologically relevant applications.
+the use of information systems to organize biological data
+the analysis of biological data such as dna sequences
+using computers in biology?
+i would define s as the use of various technologies to gather biological information about cell machinery (ex. replication, gene expression, etc.) and determining the inter-relationships between organisms.
+using tools to understand biological data and interpret results.
+the use of data analysis to determine the meaning of complex biological data.
+study of micb using cpsc
+using computers and software programs to analyze data (such as genomes) and sequencing them.
+collecting data and analyzing it using computer systems
+s is the study of how to understand biological processes by handling large amounts of data obtained from biological experiments
+interpreting biology through more technical science such as computer science, statistics, mathematics etc.
+designing computer software to organize and analyze biological data.
+designing computer software to organize and analyze biological data.
+extracting information from biological data through programming methods.
+complex analysis of nucleotide sequences
+using computerized analysis specifically for biological processes and relationships through databases and software.
+using analysis to make predictions about biology, as opposed to empirical/rigour methods of studying biology.
+use computational skills to analyze scientific data.
+use of a combination of biology, computer science, and engineering to obtain data
+the gathering, processing, and interpretation of data from biological systems.
+using technology and analyze and understand biological data
+a field that use computer software to analyze data derived from experiments done in biological science.
+the discipline of studying biological processes using statistics, computer science and data science approaches.
+analyze biological information as data
+gathering biological information from data through the use of software
+field of study that comes up with methods, algorithms, or programs that help people understand, interpret and analyzed biological data.
+s is the use of computational software in scientific research.
+the science that analyzes dna sequence to predict or explain biological mechanisms.
+work that combines disciplines of biology and computer science, mathematics, and statistics.
+data science applied to biology
+the use of computerized systems to analyze data in terms of biology.
+s is biological statistics.
+software for biological data
+a computer science method to deal with biological data
+the study of information that pertains to biology.
+the analysis of large sets of biological data (e.g. genome and protein structure databases) using computer science and statistics
+i would define s the same as i would define data science.
+it is the analysis of biological data by using some kind of software or a specific designed program for answering a questions.
+the application of data science and other technological means to study biological data.
+using statistical analysis and data science as a tool to analyze and predict data in the biological sciences
+s combine biology and statistics, and other fields to analyze and understand data pertaining to biology.
+development of software that help with the analysis or collection of data.
+analysis of biological information, usually with the help of computer software.
+the use of data and technology to aid in biological studies.
+statistical analysis of biological molecules
+it is a field of science that analyzes biological data using software tools; another way of saying understanding biology through math.
+the application of quantified data in biology to achieve effective analysis of complex biological system and predict its changes or outcomes.
+use of statistical, quantitative, and computational techniques to analyse data related to biological activity and sciences
+another interdisciplinary scope of modern biology that basically uses software programs for analyzing and understanding (usually large amount of) biological data.
+biological information presented by numbers and graphs
+using software to extract information from biological processes
+i am not very familiar with the term, but i think that s is the usage of certain programs to collect data and analyze it.
+s sounds like a use of information to present biological findings
+the development of software and tools to determine data from biology
+using computers and statistical ideas to manage large volumes of biological data, mostly dna/rna sequences.
+using data science to study biological systems (including sub-cellular processes).
+the use of computer programs to interpret biological data and use in, for example, genetics and forensics.
+s is a branch of life sciences that specifically focuses on understanding data in laboratories and online databases.
+understanding biological data using computer technology to interpret and analyze this data.
+the collection of biological data on a computerized system for the purpose of data analysis.
+data science but with biology as a focus
+a field that aims to interpret and analyze biological data
+a field of study where computer programming is used for understanding biological results form a study.
+the field of designing processes to determine information from collected data
+a subset of data science where all the data is biological data (eg. the genome of an organism, etc.)
+the science of collecting and analyzing scientific data, such as genomic data
+using computers and biology together to answer questions in science.
+the information you gain from the scientific data analyzed.
+i don't know
+using computer software to represent biological data
+analysis of biological data using statistical methods to see patterns and draw conclusions from large quantities of experimental data
+i would define s as combining biology (or a similar life science) with programming.
+analyzing biological information by using computers and technology
+the study of analyzing biological data
+using software to solve biology-related problems.
+i have heard of the term before but am not sure what it means. i would assume some sort of information that is transferred via. living things
+a field that involves using computer science to study biology.
+using statistics to examine biological data
+it is the gathering of biological information for its analysis and interpretation.
+tools to help better understand identifying data?
+using statistics and analytics to aid research in biology
+using algorithms to analyze biological data
+i would define s as using statistical methods to interpret data taken from the biological field.
+the use of computational methods to model and study biological systems
+the use of technology to understand biological data, such as sequencing the genome.
+creating softwares/scripts/programs to be used in research
+i don't really know what this is.
+biology and computers
+the study of biological data
+use of data science (software tools, other methods) to solve problems in biology.
+using statistics to study biology and present data in a meaningful way
+the design of algorithms for the specific purpose of solving problems related to the field of biology/biochemistry.
+sequencing genome
+s is a combination of computer science and biology, using computer programs and algorithms to study and interpret data from biological study.
+using various tools to manipulate raw data into forms that can be used to answer questions, compare results and reach conclusions
+collecting and analyzing quantitative data in biological research.
+implementing certain techniques to analyze biological data.
+protocols and to analyze scientific data
+the careful recording of data on biological subjects for accessibility and better analysis
+s collects and analyzes complex biological data.
+using computational methods to analyze genetic data
+NA
+s /ˌbaɪ.oʊˌɪnfərˈmætɪks/ ( listen) is an interdisciplinary field that develops methods and software tools for understanding biological data. as an interdisciplinary field of science, s combines biology, computer science, mathematics and statistics to analyze and interpret biological data. -google
+i would guess that s is the field of collecting and analyzing large amounts of data in relation to biology.
+tools and information to study science
+s is the study of developing software and systems using methods from computer science, statistics, and math to understand and present biological information.
+s is a field of science dedicated to creating tools, models, and software in order to better understand biology.
+the use of computational tools that pattern the data pertaining to the field of biology
+using software tools to analyse biological data
+collecting and analyzing complex biological data
+using computer programs to organize, interpret, analyze, and compare large amounts of data.
+i honestly have no idea
+developing tools for understanding data in biology
+the use of tools to understand biological data.
+s combines biology, computer science, mathematics and statistics to analyze and interpret biological data.
+the combination of biology and computer science. biological data is studied using computer science.
+study of data
+study data related to biology.
+i would define s as using different computer systems to understand biological data
+the field of science that develops method or software that allows us to understand biological data
+trying to understand biological data
+using computational methods to analyze biological data and information.
+s is the use of technological tools to better acquire and asses biological data.
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA

@@ -1,0 +1,188 @@
+Post_DS_define
+science based around the computational manipulation and analysis of very large sets of information
+a field of science that requires experimental data and analyzing that data using specific techniques and technologies
+the science of data
+the science of organizing large quantities of data so they mean something
+the analysis of acquired data to gain knowledge about a given subject.
+NA
+studying science by looking at and interpreting data
+ is the collection, study, and analysis of data.
+using statistical data to study/quantify a scientific subject matter.
+using data/statistics and applying it to the field of science.
+the analysis of data.
+ is the manipulation/use of data to achieve a goal/find a pattern.
+the manipulation of obtained data from experimental results to extrapolate its significance.
+process of using or obtaining data for various applicaitons.
+i am still not really sure, but it is possibly science that focuses using/collecting/analyzing various types of data to reach a conclusion
+NA
+never heard of it before
+an area in science that involves use of computers to help find information based on large numbers of data
+how to analyze data
+interpreting data
+collecting and analyzing data to get information about a particular subject
+NA
+data driven science
+science based on the gathering and interpretation of information.
+the science regarding the interpretation and representation of data.
+the studying of all life on earth done using collected data (observational).
+database that has digital file of information
+a way in which information is extracted from data retrieved.
+using scientific methods to analyze/make sense of data
+the science of gathering, interpreting and analyzing data.
+production and analysis of data
+science of data and information.
+it computational program to organize, analyze and present data.
+looking at lots of data, doing analysis on it with various methods and trying to answer bigger problems/hypotheses
+analysis of data with a lot of number crunching
+the use of scientific methods to analyze data.
+interpreting outcomes from scientific experiments using the data obtained, in number form and using defined equations to make use of these numbers.
+, also known as data-driven science, is an interdisciplinary field about scientific methods, processes, and systems to extract knowledge or insights from data in various forms, either structured or unstructured, similar to data mining. data science is a concept to unify statistics, data analysis and their related methods in order to understand and analyze actual phenomena with data.
+the study of science and reaching conclusions through manipulation of available data: instead of conducting a physical experiment, using known equations, data processing techniques, and the like, to make (usually precise) predictions about what the outcome would be (if an experiment were to be conducted).
+NA
+ refers to the bioinformatics portion of science, where data is collected and represented graphically and statistically.
+usage of large databases/information and ways to deal with that information
+NA
+the science that has to do with gathering data and getting information from it
+collecting data and analyzing it
+science is which large amounts of data is collected for analysis.
+a combination of computer science and statistical analysis.
+the analysis of data for scientific applications
+collection and analysis of data.
+the use of computer software to sort through and get meaningful information from a large dataset
+i would define  broadly as a mix of statistical and computational measures to help resolve questions related towards scientific fields.
+the science on how to interpret and use data in scientific findings.
+NA
+collection and analysis of data
+recording numerical information for the purposes of analysis
+extracting information from data using statistics and other methods
+the science of handling large amounts of data.
+ is a way of analyzing data sets and making meaning of them using computer science and statistical techniques.
+the study of data
+the study of data
+NA
+in microbiology,  is using computer programs to analyze metagenomic data.
+ is the study of taking numerical information from an experiment and organizing it in such a way that an interpretation can be achieved.
+the study of analyzing data.
+basically use software to analyze science data
+not sure
+the process of gathering, processing, and analyzing data.
+understand and actual phenomena with data
+use statistics to analyze data collected from scientific research
+the science of data obtainment, extraction and analysis.
+use different to analyze data in order to find the pattern or prove the hypothesis
+ is extracting useful information from large aggregations of information.
+NA
+using scientific methods, processes, algorithms, and systems to extract knowledge and insights from data
+ is an interdisciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from data in various forms.
+NA
+the use of technology, statistics to help us understand data collected in the field
+the use of processes and technology to gain knowledge and understanding of data.
+NA
+extracting information and insights from data using scientific methods.
+ is a field where data are analyzed using different scientific methods to understand them
+the study of data
+literally the science of data. any analysis of data, often of large quantities of data, with the use of computer software/programming.
+analysis and representation of numerical results.
+ refers to a branch of science that focuses on the study of the data, by using different methods, techniques, and test to understand the meaning and significance of the information.
+the study involved with analyzing relationships and developing statistical information based on given data.
+ways in which you cant find relationships in data and organize it.
+analysis of data that is gathered, whether through graphs, tables, or statistics.
+NA
+the study and analysis of information obtained from scientific data collection
+the use of statistics to analyze data in scientific contexts.
+organizing and manipulating data from scientific experiments
+it is an interdisciplinary field that uses scientific methods and algorithms to extract insights, underlying patterns, and understanding of various concepts from data in various forms.
+the study of obtaining, understanding, analyzing and utilizing data. analyzing refers to making inferences of a population from sample.
+NA
+the science of gathering, sorting and thorough analysis and interpretation, modelling and extrapolation of any data pool in diverse contexts and scopes.
+the science of trying to extract information from a set of data.
+NA
+ is when you use various tools, statistics to organize information and analyze it.
+ is the use of systems to interpret data
+science that is used to manage large amounts of data
+the process of science as it applies to working with large amounts of data, typically analyzed using a computer.
+ is the study and analysis surrounding data sets.
+the use of data to gain insight and knowledge in a certain subject.
+ is the process of understanding and interpreting data so that it is useful.
+NA
+the science of biological data organization and manipulation.
+using scientific methods to extract information from data
+ involves using statistics, data analysis and machine learning to analyze and understand actual phenomena with data
+the science of handling and manipulating scientific data
+using a variety of scientific and technological methods to gather information from data
+working with (usually big) data which can be from various fields and interpreting the data.
+data about actual scientific experiments and samples
+using statistics and other analysis tools to work with the data you collected in an experiment.
+analyzing scientific data, and knowing how to make sense of the results given.
+an interdisciplinary part of science where coding is used to evaluate data
+the use of programs, statistical analysis, and scientfic methods to extract insights (form conclusions) from collected data.
+it is the analysis of the large quantities of data to determine relationships
+ is using computer programs that help analyze data with math and statistics.
+the science of analyzing and interpreting data and processing the data in a way that others can understand it
+ is the study of organizing and analyzing data using different techniques and programs.
+the field of analyzing data, and figuring out how to best analyze data
+NA
+ is the interpretation and analysis of data in general.
+using computer science (analysis programs, algorithms, etc) to make sense of scientific data
+ is a discipline that uses algorithms and statistical analysis to obtain information from a database.
+interdisciplinary field to use statistics, data analysis, scientific methods, etc to gain information from the data
+analyzing scientific data
+using statistics, data analysis, and algorithms to extract and understand collected data.
+ is the analysis of data taken from research made within the field and extrapolating it to find significant results, correlations, relationships etc. within the variables being analyzed.
+the use of technology to interpret data
+using programs to analyze data collected in order to extract information.
+ is the use and analysis of data and analysis
+the science of collecting, organizing, and interpreting data using computer programs that can allow perform biological sequence analysis, graphical displays etc.
+data gathered from experiments
+the study of data manipulation
+ is the use of a variety of computational tools to organize or interpret large/complex amounts of data into a way that is understandable.
+ is a field that includes scientific method using algorithms
+the use of scientific methods, and algorithms to provide insights towards data
+analysis of science data
+ is a field using a combination of scientific methods, computer science and coding, and mathematics and statistics to collect and interpret meaningful data from scientific experiments.
+manipulating values and statistics to draw conclusions
+using computer software to process and analyze large quantities of scientific data generated from fieldwork and/or experiments.
+the methodology behind working with and analyzing computerized data
+using data to provide support for a scientific argument
+the processing and analysis of compiled experimental and observed data to further scientific understanding.
+ uses algorithms to extract information from data in various forms.
+using data analysis to construct answers to scientific questions.
+NA
+ is an interdisciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from data in various forms, both structured and unstructured, similar to data mining.
+analyzing large quantities of data
+using scientific methods, programs, and specific data to interpret data.
+ uses a combination of scientific methods, algorithms, statistical tests, and other processes (command line, r studio, python, etc) to extract and analyze the data.
+NA
+ is using computational methods to collapse/expand collected data that has been sampled and is also defined by using various statistical methods from the sampled data to draw conclusions.
+a concept to unify statistic, data analysis, machine learning and their related methods in order to understand and analyze actual phenomena with data
+using scientific methods, processes, algoriths, system to interpret data
+using computer programs to interpret and analyze data.
+the study of a topic by the compiling and analysis of data
+the science of statistically analyzing data gathered in experiments using computer science
+analysize of scientific data
+analyzing collected data in the field of science.
+using various disciplines of science and computing to better understand data
+is a term used to analyze the scientific data using new technology and widget for better understanding
+the use of different software to analyze a bunch of data.
+ is analyzing large amount of data using algorithms in order to provide results
+ is the field that uses computer programs to run data collected from the field and find correlations between factors.
+ is essentially extracting information from data to solve problems.
+use of computational science to analyze scientific data
+ is taking raw experimental data, and processing it in a way that makes it easier to visualize and identify trends.
+the science of organizing, interpreting and drawing useful connections using data
+the study of data interpretation and presentation.
+using data and analysis to support science advances.
+not sure
+not sure
+analyzing data from science
+analysis of data to see patterns
+the science of extracting information from data
+science based on data
+using statistics to analyze the reliability and result of data obtained from an experiment.
+analysis of biological data using technology
+using mathematical tools to take information from data to develop scientific theories, concepts, discover relationships, etc.
+science of collecting and analyzing data
+analysis of large amounts of data (typically requiring software assistance) through a scientific method to gain useful conclusions
+a field that uses computers to translate data into relevant information.
+science for data
+use of statistical methods to analyze data

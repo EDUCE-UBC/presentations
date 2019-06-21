@@ -1,0 +1,189 @@
+Pre_DS_define
+the science concerning the analysis of very large sets of information based mostly in computational tools.
+using data to analyze science.
+research that relies on a large amount of collected data and its analysis; very computer based (e.g. sequencing as opposed to crystallography)
+organizing data from experiments in a meaningful way (to prove or disprove a hypothesis)
+ is a form of science where knowledge is gained from analysis of various forms of data.
+biostats , computer science, figuring out what data means
+science involved in deducing information from sets of data or using data to understand bigger principles.
+the study of collecting and analyzing data
+statistical and computational analysis related to scientific concepts
+analyzing complex data in order to draw conclusions and applications to real life.
+the systematic study of data.
+ is analyzing scientific results using
+performing statistical analysis on quantitative data.
+science of using data for achieving something.
+ is science that relies heavily on collecting, processing and analyzing data to create/produce an output.
+information for science that focuses specifically on trying to data things onto the computer. it would include information like genome sequences and proteins.
+i have no idea
+science that involves data from people
+working with data and using it to learn more about the world
+methods to analyze sets of data.
+analyzing data to solve problems
+no idea
+science based on use of data
+science involving the gathering of data.
+the science of examining amounts of data
+the study and theories of all life in the universe.
+database that include all the numerical and genetic data in science.
+science that involves data collecting and analyzing.
+analysis of data using computer technology
+the science of analyzing and interpreting data.
+areas of research related to data, and data analysis
+i don't know - never heard of it.
+the science of analying data.
+the study and use of large amounts of data to draw conclusions about things in life.
+science with no wet lab, only number crunching.
+the use of data in science.
+getting various forms of data from scientific approaches.
+scientific data that has been gathered
+science carried out through the use of high-throughput data systems: such as running a dna sequence against a large database.
+ is the field of using proper tools for data analysis.
+data that refers to science, such as sequencing data or statistics.
+discipline dealing with datasets
+science of analysis and interpretation of data in order to get conclussions related to science.
+using statistics and computer science to get information about data.
+using statistics to analyze data.
+ is the science of extracting useful information from experimental data.
+the scientific analysis of data in order to gain meaningful and useful information. either through the development of software systems or otherwise.
+science that is derived through data analysis
+the analysis of data received in order to generate a model that can be used to extrapolate and predict new values that may be encountered.
+science of going through and processing data
+ can be described as how data applications and information can be interpreted to determine scientific findings.  specifically, the focus relies upon the methods of gathering data, and the significance of the data found.
+the science behind how to use and incorporate data into research and how to use data to further one's knowledge.
+the process of using complex and large amounts of data to determine correlations
+study of data and how it is collected and analyzed
+something along the line of statistics, graphing data.
+organizing data into different forms in order to understand it better
+ is the study of handling and understanding data.
+NA
+statistics
+statistics
+the process of withdrawing scientific conclusions based on data analysis.
+the scientific process of data analysis in a larger context.
+using computerized analysis to gain numerical insight into scientific processes and relationships.
+ is the study of data. more specifically, it means the ways in which collected information can be processed, used, and presented.
+the science used to analyze data.
+data generated from an experiment or research
+the study of how to gather data, process it, and then interpret the results.
+use data to analyze and understand processes in the real world
+using computer data analysis to evaluate a large amount of data. the data can be of any kind, for example experimental raw data or survey data.
+the discipline of data extraction, data manipulation, and data analysis.  helps people understand and extract useful information from the data they obtain from various sources.
+analyze data using scientific tools to draw conclusion
+making use of large amounts of data to gather useful information
+field of study that uses the extracted or obtained data to analyze it and gain an insight, new information or new idea about the topic.
+ is about getting a message out of a set of number, using algorithm and analysis techniques.
+the method of approaching science from mathematics and statistics.
+science that works with numbers, algorithms, and statistics to form conclusions.
+use of mathematics, statistics, computers to analyze and understand data that was collected
+the study of data using various methods and algorithms.
+ uses scientific methods and processes to extract knowledge and insight from data.
+the process of getting insights/knowledge from data.
+scientific approach to analyze data
+the study of data, as depicted in graphs, tables, etc...
+the study of of data analysis (although that also sounds like the definition of 'statistics'...)
+organizing, representing and understanding data collected in labs/field.
+it refers to the scientific analysis of a set of data taken from a population, experiment,etc, for answering specific questions.
+the use of statistics and data analysis to gain further information about data.
+the study of data recollection and its analysis
+ is science collected and extracted from data, and other computer tools.
+analysis of data using science.
+science of information obtained from research, and its analysis.
+using data and statistical methods to answer or model scientific problems
+practice of interpreting, producing scientific data
+ analyzes a lot of data using different methods to extract some insights (e.g., patterns).
+the study of processing, presenting analyzing data, and the study of utilizing data for complex analysis and predictions.
+use of statistical, quantitative, and computational techniques to analyse and understand given data
+a cross-disciplinary field where scientific theories and techniques and procedures applied to explore potential patterns and eventually new perspectives from huge pools of data.
+the analysis and collection of data
+a discipline that gets information from various forms of data
+science that is data-driven, and based on empirical numbers.
+since i do not know, i would say it is the use of algorithms or graphs to display findings.
+science that uses data and informatics to gain knowledge about the world.
+knowledge about understanding and working with very large volumes of data, often with the help of computers.
+the collection and study of data. run experiments, collect data, analyze the data and draw conclusions.
+-
+ is the study of how to interpret, manipulate, and apply data to a wide variety of use cases.
+learning how to analyze and understand practical data.
+the collection and analysis of scientific data to determine its validity in a study.
+the extraction of knowledge and insights from data in various forms
+a field that uses various scientific methods to extract scientific data that is in different forms.
+the science of applying statistics to a set of results
+the field of determining information from collected data
+analyzing data by finding patterns in it and using these patterns to gain more information and find more patterns.
+it is a field that uses scientific method and process to extract knowledge
+the practice of using experimentally gathered data to answer questions related to any field of study in science (ex. biology).
+integration between data analysis, and scientific data.
+"using statistical skills to analyze obtained data from experiments
+"
+interpretation of mass collected data using scientific principles/methods
+using mathematical and statistical methods to interpret large quantities of data from experiments.
+"i would define  as working with quantitative information obtained from experimentation and then analyzing it using a program such as ""r""."
+the science of analyzing data to learn new things
+the study of collecting, analyzing and interpreting data that combines stats and comp sci
+ is the science of how to analyze and sort data.
+i assume it would mean the collection of data as a way of completing science. to me this would mean quantitative experiments and research.
+a field that involves organizing a large amount of data from various scientific experiments.
+using statistics and analysis to extract information or patterns from collected data.
+ is a tool for scientific research. data science gathers information using statistical methods, analyzes the data, interprets results and makes conclusions.
+using statistics to determine trends and correlations to better understand something.
+quantifying the results of scientific experiments and analyzing them
+using scientific methods and algorithms to extract relevant information from data.
+i would define  as using scientific methods to extract data from the scientific world.
+the analysis of data using computational methods
+making scientific conclusions based on data collected.
+use of scientific methods (ex. r, python, etc) to analyze datasets.
+the science of interpreting experimental data presented in different forms, including graphical, numerical, and animated forms.
+data in science
+the study of data (ie via statistical methods)
+use of computer science or algorithms and statistics to extract knowledge from data.
+statistics
+the use of programs and algorithms to manipulate and view data in order to extract meaning from the data.
+the science of organizing and analyzing data
+i would assume  refers to the science of the study and analysis of data.
+manipulating data collected from experiments to reach conclusions
+using large collections of quantitative information to aid in scientific research.
+implementing certain techniques to extract information from data.
+analyzing experimental science data
+the organization and use of data to further scientific inquiry, for example, using statistics to analyze experimental results
+ uses scientific methods to extract knowledge from data in various forms.
+using certain methods to analyze data and draw conclusions.
+NA
+ is an interdisciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from data in various forms, both structured and unstructured, similar to data mining. -google
+not sure- haven't heard of it!
+collecting data from past field studies and analyzing them using statistical tests
+ uses numerical systems to present scientific information.
+science that revolves around analyzing scientific data. this includes looking for statistical significance in the data, or connecting the data to identify a pattern or confirm a hypothesis.
+analyzing and interpreting data pertaining to the field of science
+using statistics or scientific methods to get knowledge from data
+using scientific methods to analyze and use data
+the scientific application of data or possibly the science of using data.
+analysis of information
+science regarding data analysis
+the compilation of data in a given project which is then used to determine possible patterns or significance.
+it is an interdisciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from data in various forms, both structured and unstructured, similar to data mining.
+using math and statistics to understand data.
+data to be analyzed
+a type of science that studies numbers.
+i would define  as using different methods or systems to analyze or extract data, and it is the combination of computer science, statistics and possibly other life sciences.
+a field of science that uses data to extract useful information and reach valid conclusions
+extracting data and making predictions using that data
+combining science with different sets of data
+the science of collecting and organizing research/scientifically acquired information in a way that allows more efficient analysis and more reliable results.
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA
+NA

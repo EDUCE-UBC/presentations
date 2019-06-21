@@ -1,0 +1,489 @@
+---
+title: |
+  | Incorporating data science
+  | into undergraduate microbiology
+author: | 
+  | Kim Dill-McFarland
+  | U. of British Columbia
+  | @kdillmcfarland
+date: 'June 21, 2019'
+output: 
+  beamer_presentation:
+    colortheme: "ubc"
+    fonttheme: "professionalfonts"
+    slide_level: 2
+classoption: "aspectratio=169"
+editor_options: 
+  chunk_output_type: console
+---
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ggthemes)
+library(scales)
+```
+```{r survey data, echo=FALSE, message=FALSE, warning=FALSE}
+# Cleaned in EDUCE/Survey_analysis/Survey_analysis_MICB2019
+survey <- read_csv("data/2017.18.19_survey_clean.csv")
+```
+
+## 
+
+\begin{center}
+\includegraphics[width=.55\textwidth]{images/word_cloud1.png}
+\end{center}
+
+# > 90% of researchers in the biological sciences work with \newline or plan to work with big data. \newline \newline \newline Williams & Teal 2017
+
+## Poll
+### When in your career did you *start* acquiring data science skills?
+
+a. K12
+b. Undergraduate
+c. Graduate
+d. Postdoc
+e. PI / Scientist / Researcher
+f. I do not use data science
+
+# > 60% of researchers in the biological sciences report a need for more training in data science. \newline \newline \newline Meta-analysis 2013 - 2016  \newline Attwood _et al_ 2017
+
+## 
+
+\begin{center}
+\includegraphics[width=.55\textwidth]{images/word_cloud2.png}
+\end{center}
+ 
+##
+\vspace{24pt}
+
+\begin{columns}
+
+\begin{column}{0.5\textwidth}
+\begin{center}
+\includegraphics[width=.8\textwidth]{images/EDUCE_Globe.png}
+\end{center}\end{column}
+
+\begin{column}{0.5\textwidth}
+\Huge
+$\color{teal}{\textbf{E}}$xperiential
+
+$\color{teal}{\textbf{D}}$ata science for
+
+$\color{teal}{\textbf{U}}$ndergraduate
+
+$\color{teal}{\textbf{C}}$ross-disciplinary
+
+$\color{teal}{\textbf{E}}$ducation
+\par
+\end{column}
+
+\end{columns}
+
+# Our goal: \newline \newline Modular integration of data science curriculum \newline into existing microbiology courses  
+
+## Content overview
+
+\begin{center}
+\includegraphics[width=.8\textwidth]{images/fig1a.pdf}
+\end{center}
+
+## Content overview
+
+\begin{center}
+\includegraphics[width=.8\textwidth]{images/fig1b.pdf}
+\end{center}
+
+## Course overview
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{images/fig2a.pdf}
+\end{center}
+
+## Course overview
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{images/fig2b.pdf}
+\end{center}
+
+## Examples
+\vspace{6pt}
+\begin{columns}
+
+\begin{column}{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/jemi1.pdf}
+\end{center}\end{column}
+
+\begin{column}{0.5\textwidth}
+Genomic and transcriptomic analysis of denitrification processes at 120m in Saanich Inlet
+
+\vspace{24pt}
+
+Kevin Chan, Dionzie Ong, Adam Mesa, Gurkiran Parmar, Raaghul Anand
+\end{column}
+
+\end{columns}
+
+## Examples
+\vspace{6pt}
+\begin{columns}
+
+\begin{column}{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.65\textwidth]{images/jemi2.pdf}
+\end{center}\end{column}
+
+\begin{column}{0.5\textwidth}
+A Shallow Dive into Saanich Inlet: Metagenomics Analysis at 10m Depth
+
+\vspace{24pt}
+
+Virginia Pichler, Jessica Ha, Vivian Li  (Greg Morgan, William Zeng)
+\end{column}
+
+\end{columns}
+
+# Does EDUCE effectively teach \newline data science skills \newline to microbiology students?
+
+## Poll
+### What aspect of 'data science' do you think undergraduate students find most difficult?
+
+a. Programming / scripting
+b. Statistics
+c. Installing software
+c. Interpretation within the context of microbiology
+d. Other (Provide your response in our open GitHub issue!)
+
+# Does EDUCE effectively teach \newline data science skills \newline to microbiology students? \newline \newline \newline _MICB 301 as a case study_
+
+## EDUCE in MICB 301
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/MICB301.pdf}
+\end{center}
+
+* Required for MICB majors
+* ~120 students / yr
+* 5 x 50 min class sessions across 5 weeks
+
+## Increased awareness of data science
+Have you heard the term _____________? 
+
+\vspace{12pt}
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.height=2.5, fig.width=5}
+survey %>% 
+  select(Course, Pre_DS, Post_DS,
+         Pre_BI, Post_BI, year) %>% 
+  filter(Course == "MICB301") %>% 
+  #Gather pre/post data
+  gather("group", "YN", Pre_DS, Pre_BI, Post_DS, Post_BI) %>% 
+  drop_na(YN) %>% 
+  separate(group, into=c("survey","term"), sep="_") %>% 
+  mutate(survey = factor(survey, levels = c("Pre", "Post"))) %>% 
+
+ggplot(aes(x=survey, y=..prop.., group=YN, fill=YN)) + 
+  geom_bar(position = "fill", width=0.5) +
+  labs(x="Survey", y="Proportion of\nresponses", fill="") +
+  facet_grid(~term, labeller=as_labeller(c("DS"="Data science", "BI"="Bioinformatics"))) +
+  theme_bw(base_size = 16) +
+  theme(text = element_text(size=13), 
+        panel.spacing = unit(2, "lines")) 
+```
+
+## Definitions of data science
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{images/Post_DS_wordcloud.png}
+\end{center}
+
+## Definitions of bioinformatics
+
+\begin{center}
+\includegraphics[width=0.55\textwidth]{images/Post_BI_wordcloud.png}
+\end{center}
+
+## Increased interest in data science
+How would you rate your interest in...
+
+\vspace{12pt}
+
+```{r interest, echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.height=2.5, fig.width=5.5}
+interest <- survey %>% 
+  select(Course, year,
+         Pre_Interest_BI, Post_Interest_BI,
+         Pre_Interest_CPSC, Post_Interest_CPSC) %>% 
+  filter(Course== "MICB301") %>% 
+  # Select matched pre-post
+  drop_na() %>% 
+  #Gather pre/post data
+  gather("subject", "interest", -Course, -year) %>% 
+  drop_na(interest) %>% 
+  # Create separate pre/post column
+  separate(subject, into=c("survey","trash","subject"), sep="_") %>% 
+  # Convert numeric survey respones to groups
+  ## None=0, low=1-3, med=4-7, high=8-10
+  mutate(interest_cat = ifelse(interest == "0", "None",
+                        ifelse(interest %in% c("1","2","3"), "Low",
+                        ifelse(interest %in% c("4","5","6","7"), "Medium",
+                        ifelse(interest %in% c("8","9","10"), "High",
+                        interest))))) %>% 
+  #Reorder groups
+  mutate(survey =  factor(survey, levels = c("Pre", "Post")),
+         interest_cat = factor(interest_cat,
+                               levels=c("High","Medium","Low","None"))) %>% 
+  select(-trash) %>% 
+  group_by(Course, survey, subject, interest_cat) %>% 
+  summarize(n=n()) %>% 
+  mutate(freq=100*n/sum(n))
+
+p_interest <- ggplot(interest, aes(x=survey, y=freq, fill=interest_cat)) + 
+  geom_col(position = "fill", width=0.5) +
+  labs(x="Survey", y="Proportion of\nresponses", fill="") +
+  facet_grid(~subject, labeller = as_labeller(c("BI"="Bioinformatics\n", "CPSC"="Computer science\n"))) +
+  theme_bw(base_size = 16) +
+  theme(text = element_text(size=13), 
+        panel.spacing = unit(2, "lines")) +
+  scale_x_discrete(labels=c("Pre","Post")) +
+  scale_fill_brewer(palette = "Blues", direction=-1)+
+  scale_y_continuous(labels=scales::percent)
+
+p_interest
+```
+
+## Increased interest in data science
+How would you rate your interest in...
+
+\vspace{12pt}
+
+```{r interest2, echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.height=2.5, fig.width=5.5}
+p_interest +
+  geom_segment(aes(x = 1, y = 0.5, xend = 2, yend = 0.8),
+  arrow = arrow(length = unit(0.03, "npc"))) +
+  facet_grid(~subject, labeller = as_labeller(c("BI"="Bioinformatics\nP = 0.023", "CPSC"="Computer science\nP = 0.093")))
+```
+
+## Increased experience in data science
+What level of experience do you have in ...
+
+\vspace{12pt}
+
+```{r exp, echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.height=2.5, fig.width=5.5}
+exp <- survey %>% 
+  select(Course, year,
+         Pre_Exp_BI,   Post_Exp_BI,
+         Pre_Exp_CPSC, Post_Exp_CPSC) %>% 
+  filter(Course == "MICB301") %>% 
+  # Select matched pre-post
+  drop_na() %>% 
+  #Gather pre/post data
+  gather("subject", "exp", -Course, -year) %>% 
+  # Create separate pre/post column
+  separate(subject, into=c("survey","trash","subject"), sep="_") %>% 
+  # Convert numeric survey respones to groups
+  ## None=0, low=1-3, med=4-7, high=8-10
+  mutate(exp_cat = ifelse(exp == "0", "None",
+                        ifelse(exp %in% c("1","2","3"), "Low",
+                        ifelse(exp %in% c("4","5","6"), "Medium",
+                        ifelse(exp %in% c("7","8"), "High",
+                        ifelse(exp %in% c("9","10"), "veryHigh",
+                        exp)))))) %>% 
+  #Reorder groups
+  mutate(survey =  factor(survey, levels = c("Pre", "Post")),
+         exp_cat = factor(exp_cat,
+                               levels=c("veryHigh","High","Medium","Low","None")),
+         subject = factor(subject, levels=c("BI","CPSC"))) %>% 
+  select(-trash) %>% 
+  group_by(Course, survey, subject, exp_cat) %>% 
+  summarize(n=n()) %>% 
+  mutate(freq=100*n/sum(n))
+
+p_exp <- ggplot(exp, aes(x=survey, y=freq)) + 
+  geom_col(aes(fill=exp_cat), position = "fill", width=0.5) +
+  labs(x="Survey", y="Proportion of\nresponses", fill="") +
+  facet_grid(~subject, labeller = as_labeller(
+    c("BI"="Bioinformatics \n",
+      "CPSC"="Computer science \n"))) +
+  theme_bw(base_size = 16) +
+  theme(text = element_text(size=13), 
+        panel.spacing = unit(2, "lines")) +
+  scale_x_discrete(labels=c("Pre","Post")) +
+  scale_fill_brewer(palette = "Blues", direction=-1, 
+                    labels=c("Very high","High","Medium","Low","None")) +
+  scale_y_continuous(labels=scales::percent)
+
+p_exp
+```
+
+## Increased experience in data science
+What level of experience do you have in ...
+
+\vspace{12pt}
+
+```{r exp2, echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.height=2.5, fig.width=5.5}
+arrow_bi<-data.frame(
+  x=1,xend=2, y1=0.6,yend1=0.85, y2=0.2,yend2=0.35, y3=0.2,yend3=0.8, 
+  subject=factor("BI", levels=c("BI","CPSC","MICB")))
+
+arrow_cpsc<-data.frame(
+  x=1, xend=2, y1=0.2,yend1=0.4, y2=0.5,yend2=0.75,
+  subject=factor("CPSC", levels=c("BI","CPSC","MICB")))
+
+p_exp +
+  geom_segment(data=arrow_bi, aes(x=x, y=y1, xend=xend, yend=yend1), 
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  geom_segment(data=arrow_bi, aes(x=x, y=y2, xend=xend, yend=yend2), 
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  geom_segment(data=arrow_bi, aes(x=x, y=y3, xend=xend, yend=yend3), 
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  
+  geom_segment(data=arrow_cpsc, aes(x=x, y=y2, xend=xend, yend=yend2), 
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  
+facet_grid(~subject, labeller = as_labeller(
+    c("BI"="Bioinformatics\n P < 0.05",
+      "CPSC"="Computer science\n P = 0.002")))
+```
+
+# No changes in interest or experience \newline in "microbiology" or "statistics"
+
+## Conclusions
+
+>* Data science literacy is needed in the life sciences
+
+>* EDUCE provides a flexible, modular approach for integrating data science into undergraduate curriculum
+
+>* Even minimal exposure (5 hours) can increase student self-reported knowledge, interest, and experience in data science areas 
+
+## The future
+
+* A wealth of survey data
+
+* More courses? Other departments? 
+
+* Faculty of Science Data Science Curriculum Committee
+
+* Independent learning tools: <https://ubc-educe.shinyapps.io/course_knitter/>
+
+## Acknowledgements
+\vspace{8pt}
+
+\begin{columns}
+
+\begin{column}{0.5\textwidth}
+\textbf{Steven Hallam}
+
+\textbf{Jennifer Bonderoff}
+
+\vspace{8pt}
+\textit{EDUCE TAs}
+
+Julia Beni 
+
+Kris Hong 
+
+Jonah Lin 
+
+Yue Liu 
+
+Florent Mazel
+
+Lisa McEwen 
+
+Ryan McLaughlin 
+
+Connor Morgan-Lang 
+
+Nolan Shelley
+
+David Yin
+
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\textit{Course instructors}
+
+Sean Crowe  
+
+Lindsay Eltis  
+
+Jennifer Gardy  
+
+Marcia Graves  
+
+Martin Hirst  
+
+Bill Mohn  
+
+Dave Oliver  
+
+Jen Sibley
+
+\vspace{8pt}
+\textit{Collaborators}
+
+Gaby Cohen-Freue (STAT)  
+
+Patrick Walls (MATH)  
+
+Biljana Stojkova (ASDa)
+
+\end{column}
+
+\end{columns}
+
+## Funding
+
+UBC Teaching and Learning Enhancement Fund (TLEF)
+
+NSERC CREATE Program (ECOSCOPE)
+
+Department of Microbiology & Immunology
+
+UBC Microbiome Research Network (MRN)
+
+UBC Skylight and the Center for Teaching, Learning and Technology (CTLT)
+
+## Want to learn more?
+
+EDUCE GitHub: <https://github.com/EDUCE-UBC>
+
+EDUCE website: <https://educe-ubc.github.io/>
+
+EDUCE email: <info.educe@ubc.ca>
+
+Undergraduate Journal of Experimental Microbiology and Immunology (uJEMI): <https://jemi.microbiology.ubc.ca/>
+
+## References
+Attwood TK _et al_ 2017. _A global perspective on evolving bioinformatics and data science training needs._ Brief Bioinform. 20(2):398-404. doi: [10.1093/bib/bbx100](https://www.ncbi.nlm.nih.gov/pubmed/28968751)
+
+Williams JJ & Teal TK. 2017. _A vision for collaborative training infrastructure for bioinformatics._ Ann N Y Acad Sci. 1387(1):54-60_ doi: [10.1111/nyas.13207](https://www.ncbi.nlm.nih.gov/pubmed/27603332)
+
+## Students impacted per year
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.height=2.8, fig.width=5}
+read_tsv("data/2018_course_makeup.txt") %>% 
+  # Add total summed variable
+  mutate(Total = rowSums(.[2:8], na.rm=TRUE)) %>% 
+  # Reorder majors factor
+  mutate(major_ord = factor(Major, levels=c("MS/PhD","Other","BIOT",
+                                            "CPSC","MICB/MBIM"))) %>% 
+
+  # Gather
+  gather(key=course, value=count, "301":"447", Total) %>% 
+  na.omit() %>% 
+  
+  ggplot() + 
+  geom_point(aes(x=as.factor(course), y=major_ord, 
+                 size=as.numeric(count), color=as.factor(course))) +
+  # Size parameters, modify legend
+  scale_size_continuous(name="Number \nof students", range = c(0,10),
+                        limits=c(0,356), breaks=c(5,10,20,40,80,160,320)) +
+  # Remove color legend
+  scale_color_discrete(guide=FALSE) +
+  # Add vertical dividers
+  geom_vline(xintercept=7.4, size=1) +
+  #Beautify
+  labs(x="MICB course", y="Undergraduate major") +
+  theme_bw(base_size = 13) +
+  theme(text = element_text(size=13)) +
+  scale_y_discrete(labels=c("MS / PhD", "Other", "Biotech", "Computer\nScience", "Microbio"))
+```
